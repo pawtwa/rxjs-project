@@ -1,5 +1,5 @@
 {
-  "npmScope": "@slackmap",
+  "npmScope": "@rxjs-project",
   "implicitDependencies": {
     "angular.json": "*",
     "package.json": "*",
@@ -9,6 +9,12 @@
   },
   "projects": {
     "api": {
+      "tags": []
+    },
+    "ui": {
+      "tags": []
+    },
+    "ui-e2e": {
       "tags": []
     }
   }

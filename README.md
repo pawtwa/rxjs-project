@@ -30,8 +30,6 @@ Welcome to Angular Monorepo project, this monorepo contains backend and frontend
 
 We use [Angular CLI](https://github.com/angular/angular-cli) using [Nrwl Nx](https://nrwl.io/nx).
 
-<a href="https://slackmap.com" target="_blank"><img src="https://slackmap.com/assets/logo.svg"></a>
-
 
 ## Nrwl Extensions for Angular (Nx)
 
