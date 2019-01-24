@@ -1,17 +1,17 @@
 import { Component, OnInit, ViewChild, ViewRef, ElementRef } from '@angular/core';
-import { fromEvent, Observable, Observer, Subscription } from 'rxjs';
+import { fromEvent } from 'rxjs';
 import { ListComponent } from '../list/list.component';
 
 @Component({
-  selector: 'app-promises',
+  selector: 'app-intro',
   template: `
-    <h1>Promises vs Callbacks</h1>
+    <h1>RxJS Playground</h1>
     <button #btn class="btn btn-primary">Button</button>
     <app-list #list></app-list>
   `,
   styles: []
 })
-export class PromisesComponent implements OnInit {
+export class BasicIntroComponent implements OnInit {
 
   @ViewChild('btn')
   btn: ElementRef;
@@ -22,17 +22,20 @@ export class PromisesComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    const log = (...args) => this.list.add(...args);
+
     const button = this.btn.nativeElement;
 
-    // callbacks
-    const onClick = (e) => {
-      log(e);
-      button.removeEventListener('click', onClick);
-    };
-    button.addEventListener('click', onClick);
+    console.log('btn', button);
 
+    console.log('list', this.list);
 
+    const log = (...args) => this.list.add(...args);
+
+    log('my value label', 'my value to log');
+    log('my value to log');
+    log('my value label', 'my value to log');
+
+    this.btn.nativeElement.addEventListener('click', log);
 
   }
 

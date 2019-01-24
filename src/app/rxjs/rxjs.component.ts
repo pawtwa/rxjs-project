@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ROUTES } from '../routes';
+import { Routes } from '@angular/router';
 
 @Component({
   selector: 'app-rxjs',
@@ -6,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./rxjs.component.css']
 })
 export class RxjsComponent implements OnInit {
+
+  routes: Routes = ROUTES;
 
   constructor() { }
 
