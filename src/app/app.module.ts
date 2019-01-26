@@ -17,9 +17,9 @@ import { PipeComponent } from './basic/pipe.component';
 import { CreateComponent } from './basic/create.component';
 import { SubjectComponent } from './basic/subject.component';
 import { StoreModule } from '@ngrx/store';
-import { reducers, metaReducers } from './reducers';
+import { reducers, metaReducers } from './store';
 import { EffectsModule } from '@ngrx/effects';
-import { AppEffects } from './app.effects';
+import { AppEffects } from './store/app.effects';
 
 @NgModule({
   declarations: [

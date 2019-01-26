@@ -9,6 +9,7 @@ import { PipeComponent } from './basic/pipe.component';
 import { CreateComponent } from './basic/create.component';
 import { SubjectComponent } from './basic/subject.component';
 import { CallbackComponent } from './basic/callbacks.component';
+import { NgrxComponent } from './example/ngrx.component';
 
 export const ROUTES: Routes = [{
   path: '',
@@ -44,4 +45,7 @@ export const ROUTES: Routes = [{
 }, {
   path: 'autocomplete',
   component: AutocompleteComponent
+}, {
+  path: 'ngrx',
+  component: NgrxComponent
 }];
