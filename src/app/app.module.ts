@@ -16,6 +16,10 @@ import { CallbackComponent } from './basic/callbacks.component';
 import { PipeComponent } from './basic/pipe.component';
 import { CreateComponent } from './basic/create.component';
 import { SubjectComponent } from './basic/subject.component';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { AppEffects } from './app.effects';
 
 @NgModule({
   declarations: [
@@ -36,7 +40,9 @@ import { SubjectComponent } from './basic/subject.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StoreModule.forRoot(reducers, { metaReducers }),
+    EffectsModule.forRoot([AppEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]
