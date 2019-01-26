@@ -20,6 +20,7 @@ import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './store';
 import { EffectsModule } from '@ngrx/effects';
 import { AppEffects } from './store/app.effects';
+import { NgrxComponent } from './example/ngrx.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { AppEffects } from './store/app.effects';
     AutocompleteComponent,
     PipeComponent,
     CreateComponent,
-    SubjectComponent
+    SubjectComponent,
+    NgrxComponent
   ],
   imports: [
     BrowserModule,
