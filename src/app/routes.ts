@@ -1,13 +1,14 @@
 import { Routes } from '@angular/router';
 import { PromisesComponent } from './basic/promises.component';
 import { BasicIntroComponent as IntroComponent } from './basic/intro.component';
-import { SwitchMapComponent } from './operators/switch-map.component';
+import { OperatorsComponent } from './operators/operators.component';
 import { ObservableComponent } from './basic/observable.component';
 import { DragAndDropComponent } from './example/drag-and-drop.component';
 import { AutocompleteComponent } from './example/autocomplete.component';
 import { PipeComponent } from './basic/pipe.component';
 import { CreateComponent } from './basic/create.component';
 import { SubjectComponent } from './basic/subject.component';
+import { CallbackComponent } from './basic/callbacks.component';
 
 export const ROUTES: Routes = [{
   path: '',
@@ -18,7 +19,7 @@ export const ROUTES: Routes = [{
   component: IntroComponent
 }, {
   path: 'callbacks',
-  component: PromisesComponent
+  component: CallbackComponent
 }, {
   path: 'promises',
   component: PromisesComponent
@@ -35,12 +36,12 @@ export const ROUTES: Routes = [{
   path: 'pipe',
   component: PipeComponent
 }, {
-  path: 'operator/switch-map',
-  component: SwitchMapComponent
+  path: 'operators',
+  component: OperatorsComponent
 }, {
-  path: 'example/drag-and-drop',
+  path: 'drag-and-drop',
   component: DragAndDropComponent
 }, {
-  path: 'example/autocomplete',
+  path: 'autocomplete',
   component: AutocompleteComponent
 }];

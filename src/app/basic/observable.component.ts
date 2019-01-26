@@ -19,11 +19,16 @@ export class ObservableComponent implements OnInit {
   @ViewChild('list')
   list: ListComponent;
 
-  constructor() { }
-
   ngOnInit() {
     const log = (...args) => this.list.add(...args);
     const button = this.btn.nativeElement;
+
+
+
+  }
+
+}
+/**
 
     // const btn$: Observable<MouseEvent> = fromEvent(button, 'click');
 
@@ -32,16 +37,10 @@ export class ObservableComponent implements OnInit {
       // obs.error('custom error');
       // obs.complete();
       obs.next('custom value 2');
-      const onClick = (e) => {
+
+      button.addEventListener('click', (e) => {
         obs.next(e);
-      };
-      button.addEventListener('click', onClick);
-
-      return () => {
-        log('clean your resources');
-        button.removeEventListener('click', onClick);
-      };
-
+      });
     });
 
     const observer: Observer<MouseEvent> = {
@@ -63,6 +62,4 @@ export class ObservableComponent implements OnInit {
     //   () => this.list.add('complete')
     // );
 
-  }
-
-}
+ */

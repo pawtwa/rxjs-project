@@ -25,15 +25,28 @@ export class CallbackComponent implements OnInit {
     const log = (...args) => this.list.add(...args);
     const button = this.btn.nativeElement;
 
+
+  }
+}
+
+function ajax(url, cb) {
+  fetch(url)
+  .then(res => res.json())
+  .then( res => cb(null, res), err => cb(err));
+}
+
+/**
+
     // callbacks
     const onClick = (e) => {
-      log(e);
-      button.removeEventListener('click', onClick);
+      ajax('/api/parse', (err, data) => {
+        ajax('/api/create', (error, record) => {
+          log('record', record);
+        });
+      });
+
+      // button.removeEventListener('click', onClick);
     };
     button.addEventListener('click', onClick);
 
-
-
-  }
-
-}
+ */

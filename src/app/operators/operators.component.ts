@@ -3,14 +3,13 @@ import { ListComponent } from '../list/list.component';
 import { Observable, fromEvent } from 'rxjs';
 
 @Component({
-  selector: 'app-pipe',
+  selector: 'app-operators',
   template: `
-    <h1>
-      Metoda pipe() na Observable
+  <h1>
+  Operatory
     </h1>
-    <h2>operatory</h2>
     <p>
-      podstawowe: map, filter, reduce
+      zaawansowane: switchMap, debounceTime throttleTime combineLatest retry merge delay bufferTime switchMap takeUntil
     </p>
     <input #input type="text" id="textInput" class="form-control" placeholder="Enter Query..." autocomplete="false">
     <pre>{{text}}</pre>
@@ -19,7 +18,7 @@ import { Observable, fromEvent } from 'rxjs';
   `,
   styles: []
 })
-export class PipeComponent implements OnInit {
+export class OperatorsComponent implements OnInit {
 
   @ViewChild('input')
   input: ElementRef;

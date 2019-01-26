@@ -10,8 +10,22 @@ export class AppController {
 
 
   @Get('api')
-  getData(): string {
-    return this.appService.getData();
+  getData(@Query() name): string {
+    return ;
+  }
+
+  @Get('api/parse')
+  parse() {
+    return {
+      action: 'create'
+    };
+  }
+
+  @Get('api/create')
+  create() {
+    return {
+      message: 'record created'
+    };
   }
 }
 
@@ -28,5 +42,5 @@ export class AppController {
     ]);
   }
 
-  
+
  */
