@@ -5,13 +5,13 @@ import { ListComponent } from '../list/list.component';
 @Component({
   selector: 'app-promises',
   template: `
-    <h1>Promise</h1>
+    <h1>Callbacks</h1>
     <button #btn class="btn btn-primary">Button</button>
     <app-list #list></app-list>
   `,
   styles: []
 })
-export class PromisesComponent implements OnInit {
+export class CallbackComponent implements OnInit {
 
   @ViewChild('btn')
   btn: ElementRef;
