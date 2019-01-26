@@ -35,7 +35,7 @@ export class BasicIntroComponent implements OnInit {
     log('my value to log');
     log('my value label', 'my value to log');
 
-    this.btn.nativeElement.addEventListener('click', log);
+    button.addEventListener('click', log);
 
   }
 

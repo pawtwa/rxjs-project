@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { fromEvent, of } from 'rxjs';
+import { fromEvent, of, Observable } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
-import { map, filter, debounceTime, distinctUntilChanged, switchMap, catchError } from 'rxjs/operators';
+import { map, filter, debounceTime, distinctUntilChanged, switchMap, catchError, delay, share } from 'rxjs/operators';
 
 @Component({
   selector: 'app-autocomplete',
@@ -35,11 +35,39 @@ export class AutocompleteComponent implements OnInit {
 
   ngOnInit() {
 
+    function searchWikipedia(term): Observable<any[]> {
+      return ajax.getJSON('/api/wikipedia?limit=5&search=' + term).pipe(
+        map(response => response as any[]),
+        catchError(err => of([{title: 'error: ' + err.message}]))
+      );
+    }
+
+    const input = this.input.nativeElement;
+
+    const keyup$ = fromEvent(input, 'keyup').pipe(
+      map((e: any) => e.target.value),
+      filter((text) =>  text.length > 2),
+      distinctUntilChanged(),
+      debounceTime(250),
+      switchMap(text => searchWikipedia(text)),
+      map(results => results.filter((k, i) => i < 5 )),
+      share()
+    );
+
+    keyup$.subscribe((data: any) => {
+      console.log('data A', data);
+      this.items = data;
+    });
+    // keyup$.subscribe((data: any) => {
+    //   console.log('data B', data);
+    //   this.items = data;
+    // });
+
   }
 }
 
 /**
- * 
+ *
     function searchWikipedia(term) {
       return ajax.getJSON('/api/wikipedia?search=' + term).pipe(
         map(response => response),

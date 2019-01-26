@@ -31,14 +31,14 @@ export const ROUTES: Routes = [{
   path: 'create',
   component: CreateComponent
 }, {
-  path: 'subject',
-  component: SubjectComponent
-}, {
   path: 'pipe',
   component: PipeComponent
 }, {
   path: 'operators',
   component: OperatorsComponent
+}, {
+  path: 'subject',
+  component: SubjectComponent
 }, {
   path: 'drag-and-drop',
   component: DragAndDropComponent

@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ListComponent } from '../list/list.component';
-import { Observable, fromEvent } from 'rxjs';
+
+import { Observable, fromEvent, interval, Subject } from 'rxjs';
+import { map, distinctUntilChanged, debounceTime, debounce, groupBy, filter, bufferTime, buffer } from 'rxjs/operators';
 
 @Component({
   selector: 'app-pipe',
@@ -35,7 +37,36 @@ export class PipeComponent implements OnInit {
     const input = this.input.nativeElement;
 
     const btn$: Observable<MouseEvent> = fromEvent(button, 'click');
-    const input$: Observable<MouseEvent> = fromEvent(input, 'keyup');
+    const input$ = fromEvent<any>(input, 'keyup'); // TODO e.target.value
+
+    const interval$ = interval(1000);
+
+    function myOperator(in$) {
+      // return in$.pipe(
+
+      // );
+      const subj$ = new Subject();
+
+      in$.subscribe(v => {
+        subj$.next(v + 1);
+      });
+
+      return subj$.asObservable();
+    }
+
+    const keyboard$ = input$.pipe(
+      map(e => e.target.value),
+      distinctUntilChanged(),
+      // filter(v => v.length > 2),
+      // debounce(() => interval$),
+      // debounceTime(250),
+      // bufferTime(2000)
+      myOperator,
+      buffer(interval$)
+    );
+
+    keyboard$.subscribe(v => log('V', v));
+
 
 
   }

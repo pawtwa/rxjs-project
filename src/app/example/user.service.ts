@@ -18,6 +18,10 @@ export class UserService {
     return this._user$.asObservable();
   }
 
+  get user() {
+    return this._user$.getValue();
+  }
+
   constructor() {
 
   }
@@ -76,8 +80,11 @@ export class UserService {
     this._user$.next(null);
   }
 
-  login(): Observable<User> {
-    return ajax.getJSON<User>('/api/user');
+  login(email, pass): Observable<User> {
+    return ajax.getJSON<User>('/api/user')
+    .pipe(
+      tap(user => this._user$.next(user))
+    );
   }
 
   setupLocalStorage() {

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ListComponent } from '../list/list.component';
-import { Observable, fromEvent } from 'rxjs';
+import { Observable, fromEvent, combineLatest, BehaviorSubject, interval } from 'rxjs';
+import { startWith, map, share } from 'rxjs/operators';
 
 @Component({
   selector: 'app-operators',
@@ -35,6 +36,41 @@ export class OperatorsComponent implements OnInit {
 
     const btn$: Observable<MouseEvent> = fromEvent(button, 'click');
     const input$: Observable<MouseEvent> = fromEvent(input, 'keyup');
+
+    const config$ = new BehaviorSubject('config');
+
+    // const stream$ = combineLatest(
+    //   config$,
+    //   btn$.pipe(startWith(1)),
+    //   input$.pipe(
+    //     map((e: any) => e.target.value),
+    //     startWith('start')
+    //     )
+    // ).pipe(
+    //   map(([c, b, i]) => {
+    //     return '';
+    //   })
+    // );
+
+
+    // stream$.subscribe(v => log(v));
+
+    const interval$ = interval(1000);
+
+    const sharedInterval$ = interval$.pipe(
+      share()
+    );
+
+    sharedInterval$.subscribe(v => log('A', v));
+
+    setTimeout(() => {
+      sharedInterval$.subscribe(v => log('B', v));
+    }, 4000);
+
+    setTimeout(() => {
+
+    interval$.subscribe(v => log('Z', v));
+    }, 5000);
 
 
   }

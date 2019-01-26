@@ -25,6 +25,21 @@ export class CallbackComponent implements OnInit {
     const log = (...args) => this.list.add(...args);
     const button = this.btn.nativeElement;
 
+    const onClick = (e) => {
+      log('click');
+      ajax('/api/parse', (err, data) => {
+        log(err, data);
+        ajax('/api/create', (error, record) => {
+          log('record', record);
+        });
+      });
+
+    };
+    button.addEventListener('click', onClick);
+
+    setTimeout(() => {
+      button.removeEventListener('click', onClick);
+    }, 2000);
 
   }
 }
