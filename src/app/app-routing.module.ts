@@ -1,18 +1,21 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ROUTES } from './routes';
 import { RxjsComponent } from './rxjs/rxjs.component';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   imports: [RouterModule.forRoot([
     {
       path: '',
-      redirectTo: 'rxjs',
-      pathMatch: 'full'
-    }, {
+      component: HomeComponent
+    },
+    {
       path: 'rxjs',
-      component: RxjsComponent,
-      children: ROUTES
+      loadChildren: './rxjs/rxjs.module#RxjsModule'
+    },
+    {
+      path: 'nodejs',
+      loadChildren: './nodejs/nodejs.module#NodejsModule'
     }
   ])],
   exports: [RouterModule]

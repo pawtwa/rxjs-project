@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ListComponent } from '../list/list.component';
+import { ListComponent } from 'src/app/shared/list/list.component';
 
 import { Observable, fromEvent, interval, Subject } from 'rxjs';
 import { map, distinctUntilChanged, debounceTime, debounce, groupBy, filter, bufferTime, buffer } from 'rxjs/operators';

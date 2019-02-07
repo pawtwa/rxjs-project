@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ListComponent } from '../list/list.component';
+import { ListComponent } from 'src/app/shared/list/list.component';
 import { Observable, fromEvent, combineLatest, BehaviorSubject, interval } from 'rxjs';
 import { startWith, map, share } from 'rxjs/operators';
 
