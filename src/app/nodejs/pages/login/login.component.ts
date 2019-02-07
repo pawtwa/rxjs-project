@@ -6,11 +6,11 @@ import { endWith, mapTo, startWith, delay, catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 @Component({
-  selector: 'app-login-form',
-  templateUrl: './login-form.component.html',
-  styleUrls: ['./login-form.component.css']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.css']
 })
-export class LoginFormComponent {
+export class LoginComponent {
   form = this.fb.group({
     email: [null, [Validators.required, Validators.email]],
     password: [null, Validators.required],

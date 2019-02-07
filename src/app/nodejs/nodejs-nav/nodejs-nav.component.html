@@ -3,13 +3,23 @@
       [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
       [mode]="(isHandset$ | async) ? 'over' : 'side'"
       [opened]="!(isHandset$ | async)">
-    <mat-toolbar>Menu</mat-toolbar>
+    <!-- <mat-toolbar>Menu</mat-toolbar> -->
+    <hr>
+    <ng-container *ngIf="userService.user$ | async as user; else elseTemplate">
+      <p>Witaj <b>{{user.user.name}}</b></p>
+      <a mat-raised-button routerLink="profile">Profile</a>
+      <a mat-button (click)="userService.logout()">Logout</a>
+    </ng-container>
+    <ng-template #elseTemplate>
+        <a mat-raised-button routerLink="login">Login</a>
+        <a mat-button routerLink="register">Register</a>
+    </ng-template>
+<hr>
     <mat-nav-list>
-      <a mat-list-item routerLink="login">Login</a>
-      <a mat-list-item routerLink="register">Register</a>
-      <a mat-list-item routerLink="profile">Profile</a>
       <a mat-list-item routerLink="photos">Photos</a>
+      <a mat-list-item routerLink="comments">Comments</a>
     </mat-nav-list>
+
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">

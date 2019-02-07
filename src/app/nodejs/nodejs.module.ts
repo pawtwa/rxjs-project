@@ -14,14 +14,18 @@ import {
   MatSelectModule,
   MatRadioModule,
   MatCardModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule, MatTableModule, MatPaginatorModule, MatSortModule, MatGridListModule, MatMenuModule
 } from '@angular/material';
 import { MatProgressButtonsModule } from 'mat-progress-buttons';
-import { LoginFormComponent } from './components/login-form/login-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CommentsComponent } from './pages/comments/comments.component';
+import { PhotosComponent } from './pages/photos/photos.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 @NgModule({
-  declarations: [NodejsNavComponent, LoginFormComponent],
+  declarations: [NodejsNavComponent, CommentsComponent, PhotosComponent, LoginComponent, RegisterComponent, ProfileComponent],
   imports: [
     CommonModule,
     NodejsRoutingModule,
@@ -37,7 +41,12 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatCardModule,
     MatProgressSpinnerModule,
     ReactiveFormsModule,
-    MatProgressButtonsModule
+    MatProgressButtonsModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatGridListModule,
+    MatMenuModule
   ]
 })
 export class NodejsModule { }
