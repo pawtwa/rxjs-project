@@ -1,6 +1,6 @@
 import { DataSource } from '@angular/cdk/collections';
 import { MatPaginator, MatSort } from '@angular/material';
-import { map, switchMap } from 'rxjs/operators';
+import { map, switchMap, startWith } from 'rxjs/operators';
 import { Observable, of as observableOf, merge, BehaviorSubject } from 'rxjs';
 import { CommentModel } from '../../models';
 import { HttpClient } from '@angular/common/http';
@@ -35,11 +35,14 @@ export class CommentsDataSource extends DataSource<CommentModel> {
       this.paginator.page,
       this.sort.sortChange
     ];
+console.log('CONNECT');
 
     // Set the paginator's length
     // this.paginator.length = this.data.length;
 
-    return merge(...dataMutations).pipe(switchMap(() => {
+    return merge(...dataMutations).pipe(
+      startWith(1),
+      switchMap(() => {
       return this.http.get<CommentModel[]>('/api/comments');
       // return this.getPagedData(this.getSortedData([...this.data]));
     }));
