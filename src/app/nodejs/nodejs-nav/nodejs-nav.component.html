@@ -6,7 +6,7 @@
     <!-- <mat-toolbar>Menu</mat-toolbar> -->
     <hr>
     <ng-container *ngIf="userService.user$ | async as user; else elseTemplate">
-      <p>Witaj <b>{{user.user.name}}</b></p>
+      <p>Witaj <b>{{user.name}}</b></p>
       <a mat-raised-button routerLink="profile">Profile</a>
       <a mat-button (click)="userService.logout()">Logout</a>
     </ng-container>
