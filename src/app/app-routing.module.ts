@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { RxjsComponent } from './rxjs/rxjs.component';
 import { HomeComponent } from './home/home.component';
 
 @NgModule({
   imports: [RouterModule.forRoot([
     {
       path: '',
-      component: HomeComponent
+      // component: HomeComponent,
+      redirectTo: 'nodejs',
+      pathMatch: 'full'
     },
     {
       path: 'rxjs',
@@ -17,7 +18,7 @@ import { HomeComponent } from './home/home.component';
       path: 'nodejs',
       loadChildren: './nodejs/nodejs.module#NodejsModule'
     }
-  ])],
+  ], {useHash: true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
