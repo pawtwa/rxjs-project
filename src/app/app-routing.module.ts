@@ -7,7 +7,7 @@ import { HomeComponent } from './home/home.component';
     {
       path: '',
       // component: HomeComponent,
-      redirectTo: 'nodejs',
+      redirectTo: 'rxjs',
       pathMatch: 'full'
     },
     {

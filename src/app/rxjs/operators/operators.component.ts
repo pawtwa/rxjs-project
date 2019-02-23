@@ -39,6 +39,12 @@ export class OperatorsComponent implements OnInit {
 
     const config$ = new BehaviorSubject('config');
 
+  }
+
+}
+
+/**
+
     // const stream$ = combineLatest(
     //   config$,
     //   btn$.pipe(startWith(1)),
@@ -73,6 +79,4 @@ export class OperatorsComponent implements OnInit {
     }, 5000);
 
 
-  }
-
-}
+ */

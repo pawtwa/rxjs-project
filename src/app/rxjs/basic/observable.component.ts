@@ -23,38 +23,6 @@ export class ObservableComponent implements OnInit {
     const log = (...args) => this.list.add(...args);
     const button = this.btn.nativeElement;
 
-    // const btn$: Observable<MouseEvent> = fromEvent(button, 'click');
-
-    const btn$ = Observable.create((obs) => {
-      let counter = 0;
-      function onClick(e) {
-        if (counter > 3) {
-          return obs.complete('nie nie nie ');
-        }
-        counter++;
-        obs.next(e);
-      }
-      button.addEventListener('click', onClick);
-
-      return () => {
-        log('clean your resources');
-        button.removeEventListener('click', onClick);
-      };
-    });
-
-
-    const observer: Observer<MouseEvent> = {
-      next: (val) => this.list.add('next', val),
-      error: (err) => this.list.add('error', err),
-      complete: () => this.list.add('complete'),
-    };
-
-    const subscription = btn$.subscribe(observer);
-
-    setTimeout(() => {
-      log('timeout unsubscribe');
-      subscription.unsubscribe();
-    }, 3000);
 
   }
 
@@ -94,3 +62,40 @@ export class ObservableComponent implements OnInit {
     // );
 
  */
+
+ /**
+
+    // const btn$: Observable<MouseEvent> = fromEvent(button, 'click');
+
+    const btn$ = Observable.create((obs) => {
+      let counter = 0;
+      function onClick(e) {
+        if (counter > 3) {
+          return obs.complete('nie nie nie ');
+        }
+        counter++;
+        obs.next(e);
+      }
+      button.addEventListener('click', onClick);
+
+      return () => {
+        log('clean your resources');
+        button.removeEventListener('click', onClick);
+      };
+    });
+
+
+    const observer: Observer<MouseEvent> = {
+      next: (val) => this.list.add('next', val),
+      error: (err) => this.list.add('error', err),
+      complete: () => this.list.add('complete'),
+    };
+
+    const subscription = btn$.subscribe(observer);
+
+    setTimeout(() => {
+      log('timeout unsubscribe');
+      subscription.unsubscribe();
+    }, 3000);
+    
+  */

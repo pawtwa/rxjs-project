@@ -36,6 +36,13 @@ export class PipeComponent implements OnInit {
     const button = this.btn.nativeElement;
     const input = this.input.nativeElement;
 
+
+  }
+
+}
+
+/**
+
     const btn$: Observable<MouseEvent> = fromEvent(button, 'click');
     const input$ = fromEvent<any>(input, 'keyup'); // TODO e.target.value
 
@@ -67,8 +74,4 @@ export class PipeComponent implements OnInit {
 
     keyboard$.subscribe(v => log('V', v));
 
-
-
-  }
-
-}
+ */

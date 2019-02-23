@@ -27,6 +27,30 @@ import { tap, takeUntil } from 'rxjs/operators';
   `,
   styles: []
 })
+export class SubjectComponent implements OnInit {
+
+  subscription: Subscription;
+
+  showList = true;
+
+  @ViewChild('btn')
+  btn: ElementRef;
+
+  @ViewChild('list')
+  list: ListComponent;
+
+  list$: Observable<any>;
+  lista: any;
+
+  ngOnInit() {
+    const log = (...args) => this.list.add(...args);
+    const button = this.btn.nativeElement;
+
+  }
+
+}
+
+/**
 export class SubjectComponent implements OnInit, OnDestroy {
 
   // @OnDestroy();
@@ -80,3 +104,4 @@ export class SubjectComponent implements OnInit, OnDestroy {
   }
 
 }
+ */

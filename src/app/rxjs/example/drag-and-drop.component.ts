@@ -24,57 +24,6 @@ export class DragAndDropComponent implements OnInit {
 
   ngOnInit() {
 
-    const box = this.box.nativeElement;
-    const host = this.host.nativeElement;
-
-    const explode$ = new Subject();
-
-    const down$ = fromEvent<MouseEvent>(box, 'mousedown');
-    const move$ = fromEvent<MouseEvent>(document, 'mousemove');
-    const up$ = fromEvent<MouseEvent>(document, 'mouseup');
-
-    const drag$ = down$.pipe(
-      mergeMap((downEvent) => {
-
-        // miejsce kliknięcia na stronie
-        const startX = downEvent.pageX;
-        const startY = downEvent.pageY;
-
-        // obecna pozycja boxa
-        const boxX = parseInt(box.style.left, 10) || 0;
-        const boxY = parseInt(box.style.top, 10) || 0;
-
-        // host
-        const hostX = parseInt(host.style.width, 10) || 0;
-        const hostY = parseInt(host.style.height, 10) || 0;
-
-        return move$.pipe(
-          map( function( moveEvent ) {
-            const pos = {
-              x: boxX + moveEvent.pageX - startX,
-              y: boxY + moveEvent.pageY - startY
-            };
-            if (pos.x < hostX) {
-              explode$.next(pos);
-              pos.x = hostX;
-            }
-            if (pos.y < hostY) {
-              explode$.next(pos);
-              pos.y = hostY;
-            }
-            return pos;
-          }),
-          takeUntil(up$),
-          takeUntil(explode$)
-        );
-      })
-    );
-
-    drag$.subscribe((pos) => {
-      box.style.top = pos.y + 'px';
-      box.style.left = pos.x + 'px';
-    });
-
   }
 
 }
@@ -132,3 +81,59 @@ export class DragAndDropComponent implements OnInit {
     });
 
  */
+
+
+ /**
+
+    const box = this.box.nativeElement;
+    const host = this.host.nativeElement;
+
+    const explode$ = new Subject();
+
+    const down$ = fromEvent<MouseEvent>(box, 'mousedown');
+    const move$ = fromEvent<MouseEvent>(document, 'mousemove');
+    const up$ = fromEvent<MouseEvent>(document, 'mouseup');
+
+    const drag$ = down$.pipe(
+      mergeMap((downEvent) => {
+
+        // miejsce kliknięcia na stronie
+        const startX = downEvent.pageX;
+        const startY = downEvent.pageY;
+
+        // obecna pozycja boxa
+        const boxX = parseInt(box.style.left, 10) || 0;
+        const boxY = parseInt(box.style.top, 10) || 0;
+
+        // host
+        const hostX = parseInt(host.style.width, 10) || 0;
+        const hostY = parseInt(host.style.height, 10) || 0;
+
+        return move$.pipe(
+          map( function( moveEvent ) {
+            const pos = {
+              x: boxX + moveEvent.pageX - startX,
+              y: boxY + moveEvent.pageY - startY
+            };
+            if (pos.x < hostX) {
+              explode$.next(pos);
+              pos.x = hostX;
+            }
+            if (pos.y < hostY) {
+              explode$.next(pos);
+              pos.y = hostY;
+            }
+            return pos;
+          }),
+          takeUntil(up$),
+          takeUntil(explode$)
+        );
+      })
+    );
+
+    drag$.subscribe((pos) => {
+      box.style.top = pos.y + 'px';
+      box.style.left = pos.x + 'px';
+    });
+
+  */

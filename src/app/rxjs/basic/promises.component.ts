@@ -27,6 +27,13 @@ export class PromisesComponent implements OnInit {
     const log = (...args) => this.list.add(...args);
     const button = this.btn.nativeElement;
 
+
+  }
+
+}
+
+/**
+
     const myTask = new Promise((resolve, reject) => {
 
       setTimeout(() => {
@@ -77,8 +84,4 @@ export class PromisesComponent implements OnInit {
     };
     button.addEventListener('click', onClick);
 
-
-
-  }
-
-}
+ */

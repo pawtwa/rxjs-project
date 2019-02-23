@@ -30,6 +30,31 @@ export class CreateComponent implements OnInit {
 
 
 
+  }
+}
+
+/**
+
+    const btn$ = Observable.create((obs) => {
+      obs.next('custom value 1');
+      // obs.error('custom error');
+      // obs.complete();
+      obs.next('custom value 2');
+      const onClick = (e) => {
+        obs.next(e);
+      };
+      button.addEventListener('click', onClick);
+
+      return () => {
+        log('clean your resources');
+        button.removeEventListener('click', onClick);
+      };
+
+    });
+ */
+
+ /**
+
     // const stream$ = interval(1000);
     // const stream$ = of(1000);
     // const stream$ = empty();
@@ -69,25 +94,4 @@ export class CreateComponent implements OnInit {
     //   () => log('complete')
     // );
 
-  }
-}
-
-/**
-
-    const btn$ = Observable.create((obs) => {
-      obs.next('custom value 1');
-      // obs.error('custom error');
-      // obs.complete();
-      obs.next('custom value 2');
-      const onClick = (e) => {
-        obs.next(e);
-      };
-      button.addEventListener('click', onClick);
-
-      return () => {
-        log('clean your resources');
-        button.removeEventListener('click', onClick);
-      };
-
-    });
- */
+  */
