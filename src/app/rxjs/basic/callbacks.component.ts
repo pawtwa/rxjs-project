@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewRef, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewRef, ElementRef, OnDestroy } from '@angular/core';
 import { fromEvent, Observable, Observer, Subscription } from 'rxjs';
 import { ListComponent } from 'src/app/shared/list/list.component';
 
@@ -11,7 +11,7 @@ import { ListComponent } from 'src/app/shared/list/list.component';
   `,
   styles: []
 })
-export class CallbackComponent implements OnInit {
+export class CallbackComponent implements OnInit, OnDestroy {
 
   @ViewChild('btn')
   btn: ElementRef;
@@ -21,11 +21,36 @@ export class CallbackComponent implements OnInit {
 
   constructor() { }
 
+
+  ajaxDestroy: any;
+
   ngOnInit() {
     const log = (...args) => this.list.add(...args);
     const button = this.btn.nativeElement;
 
+    // callbacks
+    const onClick = (e) => {
+      this.ajaxDestroy = ajax('/api/parse', (err, data) => {
+        this.ajaxDestroy = null;
+        log('ajax 1', data);
+        ajax('/api/create', (error, record) => {
+          log('record', record);
+          ajax('/api/create', (error2, record2) => {
+            log('record2', record2);
+          });
+        });
+      });
 
+      button.removeEventListener('click', onClick);
+    };
+    button.addEventListener('click', onClick);
+
+
+  }
+  ngOnDestroy(): void {
+    if (this.ajaxDestroy) {
+      this.ajaxDestroy();
+    }
   }
 }
 
@@ -69,5 +94,5 @@ function ajax(url, cb) {
     setTimeout(() => {
       button.removeEventListener('click', onClick);
     }, 2000);
-    
+
   */
