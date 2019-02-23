@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { fromEvent, of, Observable } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
-import { map, filter, debounceTime, distinctUntilChanged, switchMap, catchError, delay, share } from 'rxjs/operators';
+import { map, filter, debounceTime, distinctUntilChanged, switchMap, catchError, delay, share, mergeMap, exhaustMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-autocomplete',
@@ -35,7 +35,33 @@ export class AutocompleteComponent implements OnInit {
 
   ngOnInit() {
 
+    const input = this.input.nativeElement;
+
+    const keyup$ = fromEvent(input, 'keyup').pipe(
+      map((e: any) => e.target.value),
+      filter((text) => text.length > 2),
+      distinctUntilChanged(),
+      debounceTime(250),
+      switchMap(text => searchWikipedia(text))
+      // mergeMap(text => searchWikipedia(text))
+      // exhaustMap(text => searchWikipedia(text))
+    );
+
+    keyup$.subscribe((data: any) => {
+      console.log('data', data);
+      this.items = data;
+    });
+
   }
+}
+
+function searchWikipedia(term) {
+  return ajax.getJSON('/api/wikipedia?search=' + term).pipe(
+    map(response => response),
+    catchError(err => {
+      return of([{ title: 'error: ' + err.message }]);
+    })
+  );
 }
 
 /**
@@ -66,35 +92,35 @@ export class AutocompleteComponent implements OnInit {
 
  */
 
- /**
+/**
 
-    function searchWikipedia(term): Observable<any[]> {
-      return ajax.getJSON('/api/wikipedia?limit=5&search=' + term).pipe(
-        map(response => response as any[]),
-        catchError(err => of([{title: 'error: ' + err.message}]))
-      );
-    }
+   function searchWikipedia(term): Observable<any[]> {
+     return ajax.getJSON('/api/wikipedia?limit=5&search=' + term).pipe(
+       map(response => response as any[]),
+       catchError(err => of([{title: 'error: ' + err.message}]))
+     );
+   }
 
-    const input = this.input.nativeElement;
+   const input = this.input.nativeElement;
 
-    const keyup$ = fromEvent(input, 'keyup').pipe(
-      map((e: any) => e.target.value),
-      filter((text) =>  text.length > 2),
-      distinctUntilChanged(),
-      debounceTime(250),
-      switchMap(text => searchWikipedia(text)),
-      map(results => results.filter((k, i) => i < 5 )),
-      share()
-    );
+   const keyup$ = fromEvent(input, 'keyup').pipe(
+     map((e: any) => e.target.value),
+     filter((text) =>  text.length > 2),
+     distinctUntilChanged(),
+     debounceTime(250),
+     switchMap(text => searchWikipedia(text)),
+     map(results => results.filter((k, i) => i < 5 )),
+     share()
+   );
 
-    keyup$.subscribe((data: any) => {
-      console.log('data A', data);
-      this.items = data;
-    });
-    // keyup$.subscribe((data: any) => {
-    //   console.log('data B', data);
-    //   this.items = data;
-    // });
+   keyup$.subscribe((data: any) => {
+     console.log('data A', data);
+     this.items = data;
+   });
+   // keyup$.subscribe((data: any) => {
+   //   console.log('data B', data);
+   //   this.items = data;
+   // });
 
-  */
- 
+ */
+

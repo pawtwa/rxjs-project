@@ -17,7 +17,9 @@ export class AppController {
       {title: 'Fount title 1 for ' + search},
       {title: 'Fount title 2 for ' + search},
       {title: 'Fount title 3 for ' + search}
-    ]);
+    ]).pipe(
+      delay(4000)
+    );
   }
 
   @Get('api')
