@@ -2,6 +2,7 @@ import { Controller, Get, Query, Param } from '@nestjs/common';
 
 import { AppService } from './app.service';
 import { from, of, throwError } from 'rxjs';
+import { delay } from 'rxjs/operators';
 
 @Controller()
 export class AppController {
@@ -22,6 +23,17 @@ export class AppController {
   @Get('api')
   getData(@Query() name): string {
     return ;
+  }
+
+  @Get('api/long')
+  long() {
+    return of({
+      id: 1,
+      name: 'Piotr',
+      category: 44
+    }).pipe(
+      delay(4000)
+    );
   }
 
   @Get('api/user')
