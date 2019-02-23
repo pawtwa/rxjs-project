@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ListComponent } from 'src/app/shared/list/list.component';
 
-import { Observable, fromEvent, interval, Subject } from 'rxjs';
+import { Observable, fromEvent, interval, Subject, Subscription } from 'rxjs';
 import { map, distinctUntilChanged, debounceTime, debounce, groupBy, filter, bufferTime, buffer } from 'rxjs/operators';
 
 @Component({
@@ -37,16 +37,16 @@ export class PipeComponent implements OnInit {
     const input = this.input.nativeElement;
 
 
-    const btn$: Observable<MouseEvent> = fromEvent(button, 'click');
-    const input$ = fromEvent<any>(input, 'keyup'); // TODO e.target.value
-
     const interval$ = interval(1000);
+    const btn$: Observable<MouseEvent> = fromEvent(button, 'click');
+    const input$ = fromEvent<any>(input, 'keyup');
 
     const keyboard$ = input$.pipe(
       map(e => e.target.value),
-      distinctUntilChanged(),
-      myOperator(),
-      filter(v => v.length > 2),
+      // distinctUntilChanged(),
+      myDistinctUntilChanged(),
+      // filter(v => v.length > 2),
+      myFilter<string>(v => v.length > 2),
       // debounce(() => interval$),
       // debounceTime(250),
       // bufferTime(2000)
@@ -59,9 +59,8 @@ export class PipeComponent implements OnInit {
 
 }
 
-function myOperator() {
-  return function(in$) {
-
+function myDistinctUntilChanged() {
+  return function(in$): Observable<any> {
     return Observable.create(obs => {
 
       let value;
@@ -77,10 +76,30 @@ function myOperator() {
         sub.unsubscribe();
       };
     });
-
   };
-
 }
+
+function myFilter<T>(compare) {
+  return function(in$: Observable<T>) {
+    return Observable.create(obs => {
+
+      const sub: Subscription = in$.subscribe(
+        v => {
+          if (compare(v)) {
+            obs.next(v);
+          }
+        },
+        err => obs.error(err),
+        () => obs.complete()
+      );
+
+      return () => {
+        sub.unsubscribe();
+      };
+    });
+  };
+}
+
 /**
 
     const btn$: Observable<MouseEvent> = fromEvent(button, 'click');
