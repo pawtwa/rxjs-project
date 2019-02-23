@@ -37,10 +37,50 @@ export class PipeComponent implements OnInit {
     const input = this.input.nativeElement;
 
 
+    const btn$: Observable<MouseEvent> = fromEvent(button, 'click');
+    const input$ = fromEvent<any>(input, 'keyup'); // TODO e.target.value
+
+    const interval$ = interval(1000);
+
+    const keyboard$ = input$.pipe(
+      map(e => e.target.value),
+      distinctUntilChanged(),
+      myOperator(),
+      filter(v => v.length > 2),
+      // debounce(() => interval$),
+      // debounceTime(250),
+      // bufferTime(2000)
+      // buffer(interval$)
+    );
+
+    const s = keyboard$.subscribe(v => log('V', v));
+
   }
 
 }
 
+function myOperator() {
+  return function(in$) {
+
+    return Observable.create(obs => {
+
+      let value;
+
+      const sub = in$.subscribe(v => {
+        if (value !== v) {
+          obs.next(v);
+        }
+        value = v;
+      });
+
+      return () => {
+        sub.unsubscribe();
+      };
+    });
+
+  };
+
+}
 /**
 
     const btn$: Observable<MouseEvent> = fromEvent(button, 'click');
