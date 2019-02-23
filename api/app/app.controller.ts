@@ -1,4 +1,4 @@
-import { Controller, Get, Query } from '@nestjs/common';
+import { Controller, Get, Query, Param } from '@nestjs/common';
 
 import { AppService } from './app.service';
 import { from, of, throwError } from 'rxjs';
@@ -22,6 +22,23 @@ export class AppController {
   @Get('api')
   getData(@Query() name): string {
     return ;
+  }
+
+  @Get('api/user')
+  getuser() {
+    return {
+      id: 1,
+      name: 'Piotr',
+      category: 44
+    };
+  }
+
+  @Get('api/category/:id')
+  getCategory(@Param('id') id) {
+    return {
+      id,
+      name: 'category of: ' + id
+    };
   }
 
   @Get('api/parse')
