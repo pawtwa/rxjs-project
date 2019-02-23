@@ -27,7 +27,9 @@ import { tap, takeUntil } from 'rxjs/operators';
   `,
   styles: []
 })
-export class SubjectComponent implements OnInit {
+export class SubjectComponent implements OnInit, OnDestroy {
+
+  destroy$ = new Subject();
 
   subscription: Subscription;
 
@@ -37,17 +39,49 @@ export class SubjectComponent implements OnInit {
   btn: ElementRef;
 
   @ViewChild('list')
-  list: ListComponent;
+  listComp: ListComponent;
 
   list$: Observable<any>;
-  lista: any;
+  list: any;
 
   ngOnInit() {
-    const log = (...args) => this.list.add(...args);
+
+    const log = (...args) => this.listComp.add(...args);
     const button = this.btn.nativeElement;
+
+    // const subject$ = new Subject();
+    // const subject$ = new BehaviorSubject(-1);
+    const subject$ = new ReplaySubject(2);
+
+    // log(subject$.getValue());
+
+    let counter = 0;
+
+    button.addEventListener('click', () => {
+      counter++;
+      log('counter', counter);
+      subject$.next(counter);
+    });
+
+    this.list$ = subject$.asObservable().pipe(
+      tap(value => log('tap', value)),
+      // takeUntil(this.destroy$)
+    );
+
+
+    setTimeout(() => {
+      this.list$.subscribe(v => log('V2 @@', v));
+    }, 2000);
+
+
+    // this.list$.subscribe(val => this.list = val);
 
   }
 
+  ngOnDestroy(): void {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 }
 
 /**
