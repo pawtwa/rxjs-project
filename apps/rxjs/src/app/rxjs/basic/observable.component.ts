@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, ViewRef, ElementRef } from '@angular/core';
-import { ListComponent } from 'src/app/shared/list/list.component';
 
 import { fromEvent, Observable, Observer, Subscription } from 'rxjs';
 import { share } from 'rxjs/operators';
+import { ListComponent } from '../../shared/list/list.component';
 
 @Component({
   selector: 'app-observable',

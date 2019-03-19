@@ -3,7 +3,7 @@ import { fromEvent, of } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 import { map, filter, debounceTime, distinctUntilChanged, switchMap, catchError } from 'rxjs/operators';
 import { Store } from '@ngrx/store';
-import { State } from 'src/app/store';
+import { State } from '../../store';
 
 @Component({
   selector: 'app-ngrx',

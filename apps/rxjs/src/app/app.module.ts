@@ -10,6 +10,7 @@ import { AppEffects } from './store/app.effects';
 import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { NxModule } from '@nrwl/nx';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { HttpClientModule } from '@angular/common/http';
     StoreModule.forRoot(reducers, { metaReducers }),
     EffectsModule.forRoot([AppEffects]),
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    NxModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

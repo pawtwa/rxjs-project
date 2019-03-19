@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ViewRef, ElementRef, OnDestroy } from '@angular/core';
 import { fromEvent, Observable, Observer, Subscription } from 'rxjs';
-import { ListComponent } from 'src/app/shared/list/list.component';
+import { ListComponent } from '../../shared/list/list.component';
 
 @Component({
   selector: 'app-promises',

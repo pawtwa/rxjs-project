@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ListComponent } from 'src/app/shared/list/list.component';
-
 import { Observable, fromEvent, interval, Subject, Subscription } from 'rxjs';
 import { map, distinctUntilChanged, debounceTime, debounce, groupBy, filter, bufferTime, buffer, retry, switchMap } from 'rxjs/operators';
 import { ajax } from 'rxjs/ajax';
+import { ListComponent } from '../../shared/list/list.component';
 
 @Component({
   selector: 'app-pipe',

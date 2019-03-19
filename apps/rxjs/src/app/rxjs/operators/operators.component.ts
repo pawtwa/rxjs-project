@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { ListComponent } from 'src/app/shared/list/list.component';
 import { Observable, fromEvent, combineLatest, BehaviorSubject, interval, of, EMPTY } from 'rxjs';
 import { startWith, map, share, switchMap, catchError, takeUntil } from 'rxjs/operators';
 import { ajax } from 'rxjs/ajax';
+import { ListComponent } from '../../shared/list/list.component';
 
 @Component({
   selector: 'app-operators',

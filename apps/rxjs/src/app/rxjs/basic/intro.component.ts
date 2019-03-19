@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ViewRef, ElementRef } from '@angular/core';
 import { fromEvent } from 'rxjs';
-import { ListComponent } from 'src/app/shared/list/list.component';
+import { ListComponent } from '../../shared/list/list.component';
 
 @Component({
   selector: 'app-intro',

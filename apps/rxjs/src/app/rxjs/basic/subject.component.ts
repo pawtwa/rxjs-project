@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, OnDestroy } from '@angular/core';
-import { ListComponent } from 'src/app/shared/list/list.component';
 import { Observable, Subject, Subscription, BehaviorSubject, ReplaySubject } from 'rxjs';
 import { tap, takeUntil } from 'rxjs/operators';
+import { ListComponent } from '../../shared/list/list.component';
 
 @Component({
   selector: 'app-subject',

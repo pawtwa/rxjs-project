@@ -6,11 +6,27 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
-    "lint": "ng lint",
+    "lint": "./node_modules/.bin/nx lint && ng lint",
     "e2e": "ng e2e",
     "api": "nodemon --watch api --exec \"ts-node --project api/tsconfig.api.json\" ./api/main.ts",
     "api:start": "ts-node --project api/tsconfig.api.json ./api/main.ts",
-    "g": "ng g c --flat -s -t --skip-tests --"
+    "g": "ng g c --flat -s -t --skip-tests --",
+    "affected:apps": "./node_modules/.bin/nx affected:apps",
+    "affected:libs": "./node_modules/.bin/nx affected:libs",
+    "affected:build": "./node_modules/.bin/nx affected:build",
+    "affected:e2e": "./node_modules/.bin/nx affected:e2e",
+    "affected:test": "./node_modules/.bin/nx affected:test",
+    "affected:lint": "./node_modules/.bin/nx affected:lint",
+    "affected:dep-graph": "./node_modules/.bin/nx affected:dep-graph",
+    "affected": "./node_modules/.bin/nx affected",
+    "format": "./node_modules/.bin/nx format:write",
+    "format:write": "./node_modules/.bin/nx format:write",
+    "format:check": "./node_modules/.bin/nx format:check",
+    "update": "ng update @nrwl/schematics",
+    "update:check": "ng update",
+    "dep-graph": "./node_modules/.bin/nx dep-graph",
+    "workspace-schematic": "./node_modules/.bin/nx workspace-schematic",
+    "help": "./node_modules/.bin/nx help"
   },
   "private": true,
   "dependencies": {
@@ -35,7 +51,9 @@
     "mat-progress-buttons": "^7.0.10",
     "rxjs": "~6.3.3",
     "tslib": "^1.9.0",
-    "zone.js": "~0.8.26"
+    "zone.js": "~0.8.26",
+    "@nrwl/nx": "7.7.2",
+    "@ngrx/router-store": "7.2.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.12.0",
@@ -48,7 +66,7 @@
     "codelyzer": "~4.5.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
-    "karma": "~3.1.1",
+    "karma": "~2.0.0",
     "karma-chrome-launcher": "~2.2.0",
     "karma-coverage-istanbul-reporter": "~2.0.1",
     "karma-jasmine": "~1.1.2",
@@ -57,6 +75,11 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
-    "typescript": "~3.2.2"
+    "typescript": "~3.2.2",
+    "@ngrx/store-devtools": "7.2.0",
+    "ngrx-store-freeze": "0.2.4",
+    "@nrwl/schematics": "7.7.2",
+    "jasmine-marbles": "0.4.0",
+    "prettier": "1.15.2"
   }
 }
