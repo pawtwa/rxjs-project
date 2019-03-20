@@ -6,7 +6,7 @@ import {
   MatIconModule,
   MatListModule,
   MatSidenavModule,
-  MatToolbarModule,
+  MatToolbarModule
 } from '@angular/material';
 
 import { NodejsNavComponent } from './nodejs-nav.component';
@@ -25,7 +25,7 @@ describe('NodejsNavComponent', () => {
         MatIconModule,
         MatListModule,
         MatSidenavModule,
-        MatToolbarModule,
+        MatToolbarModule
       ]
     }).compileComponents();
   }));

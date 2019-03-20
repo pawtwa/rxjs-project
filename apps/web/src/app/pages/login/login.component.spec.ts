@@ -6,7 +6,7 @@ import {
   MatCardModule,
   MatInputModule,
   MatRadioModule,
-  MatSelectModule,
+  MatSelectModule
 } from '@angular/material';
 
 import { LoginComponent } from './login.component';
@@ -17,7 +17,7 @@ describe('LoginComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoginComponent ],
+      declarations: [LoginComponent],
       imports: [
         NoopAnimationsModule,
         ReactiveFormsModule,
@@ -25,7 +25,7 @@ describe('LoginComponent', () => {
         MatCardModule,
         MatInputModule,
         MatRadioModule,
-        MatSelectModule,
+        MatSelectModule
       ]
     }).compileComponents();
   }));

@@ -14,7 +14,12 @@ import {
   MatSelectModule,
   MatRadioModule,
   MatCardModule,
-  MatProgressSpinnerModule, MatTableModule, MatPaginatorModule, MatSortModule, MatGridListModule, MatMenuModule
+  MatProgressSpinnerModule,
+  MatTableModule,
+  MatPaginatorModule,
+  MatSortModule,
+  MatGridListModule,
+  MatMenuModule
 } from '@angular/material';
 import { MatProgressButtonsModule } from 'mat-progress-buttons';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -29,21 +34,30 @@ import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-
-const routes: Routes = [{
-  path: '',
-  component: NodejsNavComponent,
-  children: [
-    {path: 'login', component: LoginComponent},
-    {path: 'register', component: RegisterComponent},
-    {path: 'profile', component: ProfileComponent},
-    {path: 'photos', component: PhotosComponent},
-    {path: 'comments', component: CommentsComponent}
-  ]
-}];
+const routes: Routes = [
+  {
+    path: '',
+    component: NodejsNavComponent,
+    children: [
+      { path: 'login', component: LoginComponent },
+      { path: 'register', component: RegisterComponent },
+      { path: 'profile', component: ProfileComponent },
+      { path: 'photos', component: PhotosComponent },
+      { path: 'comments', component: CommentsComponent }
+    ]
+  }
+];
 
 @NgModule({
-  declarations: [AppComponent, NodejsNavComponent, CommentsComponent, PhotosComponent, LoginComponent, RegisterComponent, ProfileComponent],
+  declarations: [
+    AppComponent,
+    NodejsNavComponent,
+    CommentsComponent,
+    PhotosComponent,
+    LoginComponent,
+    RegisterComponent,
+    ProfileComponent
+  ],
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes, { initialNavigation: 'enabled' }),
@@ -72,4 +86,4 @@ const routes: Routes = [{
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

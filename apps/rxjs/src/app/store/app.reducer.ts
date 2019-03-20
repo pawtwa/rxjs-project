@@ -10,12 +10,10 @@ export const initialState: State = {
 };
 
 export function reducer(state = initialState, action: AppActions): State {
-
   switch (action.type) {
-
     case AppActionTypes.LoadApps:
       return {
-        ...state,
+        ...state
       };
 
     default:

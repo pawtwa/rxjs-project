@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild, ViewRef, ElementRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ViewRef,
+  ElementRef
+} from '@angular/core';
 import { fromEvent, Observable, Observer, Subscription } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 import { ListComponent } from '../../shared/list/list.component';
@@ -13,21 +19,19 @@ import { ListComponent } from '../../shared/list/list.component';
   styles: []
 })
 export class PromisesComponent implements OnInit {
-
   @ViewChild('btn')
   btn: ElementRef;
 
   @ViewChild('list')
   list: ListComponent;
 
-  constructor() { }
+  constructor() {}
 
   async ngOnInit() {
     // return 'strin';
 
     const log = (...args) => this.list.add(...args);
     const button = this.btn.nativeElement;
-
 
     // const myTask = new Promise((resolve, reject) => {
 
@@ -43,7 +47,6 @@ export class PromisesComponent implements OnInit {
     //   myTask.then(data => log(data));
     // }, 3000);
 
-
     // try {
     //   // ajax + cache
     //   const data = await fetch('/api/parse')
@@ -56,12 +59,13 @@ export class PromisesComponent implements OnInit {
     //   console.log('error', error);
     // }
 
-
     let running = false;
     // callbacks
-    const onClick = (e) => {
+    const onClick = e => {
       log(e);
-      if (running) { return; }
+      if (running) {
+        return;
+      }
       running = true;
 
       fetch('/api/parse')
@@ -70,7 +74,9 @@ export class PromisesComponent implements OnInit {
           if (!data) {
             return Promise.reject('no data  from server');
           }
-          return fetch('/api/create', { method: 'GET' }).then(res => res.json());
+          return fetch('/api/create', { method: 'GET' }).then(res =>
+            res.json()
+          );
         })
         .catch(err => {
           return Promise.resolve({ title: 'my data from cache' });
@@ -79,16 +85,12 @@ export class PromisesComponent implements OnInit {
           running = false;
           return fetch('/api/parse');
         })
-        .catch(
-          err => log('err', err)
-        );
-
+        .catch(err => log('err', err));
 
       // button.removeEventListener('click', onClick);
     };
     button.addEventListener('click', onClick);
   }
-
 }
 
 /**

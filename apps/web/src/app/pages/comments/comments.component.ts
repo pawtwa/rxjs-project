@@ -21,7 +21,7 @@ export class CommentsComponent implements OnInit {
   displayedColumns = ['id', 'name', 'btns'];
 
   form = this.fb.group({
-    name: [null, []],
+    name: [null, []]
   });
 
   btnOpts: MatProgressButtonOptions = {
@@ -34,37 +34,36 @@ export class CommentsComponent implements OnInit {
     spinnerColor: 'accent',
     fullWidth: false,
     disabled: false,
-    mode: 'indeterminate',
+    mode: 'indeterminate'
   };
 
-  constructor(
-    private http: HttpClient,
-    private fb: FormBuilder
-  ) { }
+  constructor(private http: HttpClient, private fb: FormBuilder) {}
 
   ngOnInit() {
     this.dataSource = new CommentsDataSource(this.paginator, this.http);
   }
-
 
   onSubmit() {
     const formData = this.form.getRawValue();
     if (!formData.name) {
       return;
     }
-    this.dataSource.addComment(formData).pipe(
-      catchError(() => of(false)),
-      startWith(true),
-      endWith(false)
-    ).subscribe(data => {
-      this.form.reset();
-      if (data) {
-        this.btnOpts.active = true;
-        this.btnOpts.disabled = true;
-      } else {
-        this.btnOpts.active = false;
-        this.btnOpts.disabled = false;
-      }
-    });
+    this.dataSource
+      .addComment(formData)
+      .pipe(
+        catchError(() => of(false)),
+        startWith(true),
+        endWith(false)
+      )
+      .subscribe(data => {
+        this.form.reset();
+        if (data) {
+          this.btnOpts.active = true;
+          this.btnOpts.disabled = true;
+        } else {
+          this.btnOpts.active = false;
+          this.btnOpts.disabled = false;
+        }
+      });
   }
 }

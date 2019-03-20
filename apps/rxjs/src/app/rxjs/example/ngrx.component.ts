@@ -1,7 +1,14 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { fromEvent, of } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
-import { map, filter, debounceTime, distinctUntilChanged, switchMap, catchError } from 'rxjs/operators';
+import {
+  map,
+  filter,
+  debounceTime,
+  distinctUntilChanged,
+  switchMap,
+  catchError
+} from 'rxjs/operators';
 import { Store } from '@ngrx/store';
 import { State } from '../../store';
 
@@ -12,32 +19,35 @@ import { State } from '../../store';
     <form role="form">
       <div class="form-group">
         <label for="textInput">Enter Query for Wikipedia</label>
-        <input #input type="text" id="textInput" class="form-control" placeholder="Enter Query...">
+        <input
+          #input
+          type="text"
+          id="textInput"
+          class="form-control"
+          placeholder="Enter Query..."
+        />
       </div>
     </form>
 
-    <h2>Wyniki <small>({{items.length}})</small></h2>
+    <h2>
+      Wyniki <small>({{ items.length }})</small>
+    </h2>
     <ul class="list-group">
-      <li class="list-group-item" *ngFor="let item of items; let i=index">
-        {{item.title}}
+      <li class="list-group-item" *ngFor="let item of items; let i = index">
+        {{ item.title }}
       </li>
     </ul>
-
   `,
   styles: []
 })
 export class NgrxComponent implements OnInit {
-
-
   @ViewChild('input')
   input: ElementRef;
 
   items = [];
-  constructor(store: Store<State>) { }
+  constructor(store: Store<State>) {}
 
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 }
 
 /**

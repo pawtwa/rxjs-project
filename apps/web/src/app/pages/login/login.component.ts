@@ -2,7 +2,14 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { UserService } from '../../services/user.service';
 import { MatProgressButtonOptions } from 'mat-progress-buttons';
-import { endWith, mapTo, startWith, delay, catchError, takeUntil } from 'rxjs/operators';
+import {
+  endWith,
+  mapTo,
+  startWith,
+  delay,
+  catchError,
+  takeUntil
+} from 'rxjs/operators';
 import { of, Subject } from 'rxjs';
 import { Router } from '@angular/router';
 
@@ -16,7 +23,7 @@ export class LoginComponent implements OnDestroy, OnInit {
 
   form = this.fb.group({
     email: [null, [Validators.required, Validators.email]],
-    password: [null, Validators.required],
+    password: [null, Validators.required]
   });
 
   btnOpts: MatProgressButtonOptions = {
@@ -29,18 +36,16 @@ export class LoginComponent implements OnDestroy, OnInit {
     spinnerColor: 'accent',
     fullWidth: false,
     disabled: false,
-    mode: 'indeterminate',
+    mode: 'indeterminate'
   };
   constructor(
     private fb: FormBuilder,
     private userService: UserService,
     private router: Router
-  ) { }
+  ) {}
 
   ngOnInit() {
-    this.userService.user$.pipe(
-      takeUntil(this.destroy$),
-    ).subscribe(user => {
+    this.userService.user$.pipe(takeUntil(this.destroy$)).subscribe(user => {
       if (user) {
         this.router.navigateByUrl('/nodejs/profile');
       }
@@ -48,25 +53,26 @@ export class LoginComponent implements OnDestroy, OnInit {
   }
 
   onSubmit() {
-
-    if(!this.form.valid) {
+    if (!this.form.valid) {
       return;
     }
 
-    this.userService.login(this.form.getRawValue()).pipe(
-      catchError(() => of(false)),
-      startWith(true),
-      endWith(false)
-    ).subscribe(data => {
-
-      if (data) {
-        this.btnOpts.active = true;
-        this.btnOpts.disabled = true;
-      } else {
-        this.btnOpts.active = false;
-        this.btnOpts.disabled = false;
-      }
-    });
+    this.userService
+      .login(this.form.getRawValue())
+      .pipe(
+        catchError(() => of(false)),
+        startWith(true),
+        endWith(false)
+      )
+      .subscribe(data => {
+        if (data) {
+          this.btnOpts.active = true;
+          this.btnOpts.disabled = true;
+        } else {
+          this.btnOpts.active = false;
+          this.btnOpts.disabled = false;
+        }
+      });
   }
 
   ngOnDestroy() {

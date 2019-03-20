@@ -11,41 +11,54 @@ import { AutocompleteComponent } from './example/autocomplete.component';
 import { NgrxComponent } from './example/ngrx.component';
 import { BasicIntroComponent } from './basic/intro.component';
 
-export const ROUTES: Routes = [{
-  path: '',
-  redirectTo: 'observable',
-  pathMatch: 'full'
-}, {
-  path: 'intro',
-  component: BasicIntroComponent
-}, {
-  path: 'callbacks',
-  component: CallbackComponent
-}, {
-  path: 'promises',
-  component: PromisesComponent
-}, {
-  path: 'observable',
-  component: ObservableComponent
-}, {
-  path: 'create',
-  component: CreateComponent
-}, {
-  path: 'pipe',
-  component: PipeComponent
-}, {
-  path: 'operators',
-  component: OperatorsComponent
-}, {
-  path: 'subject',
-  component: SubjectComponent
-}, {
-  path: 'drag-and-drop',
-  component: DragAndDropComponent
-}, {
-  path: 'autocomplete',
-  component: AutocompleteComponent
-}, {
-  path: 'ngrx',
-  component: NgrxComponent
-}];
+export const ROUTES: Routes = [
+  {
+    path: '',
+    redirectTo: 'observable',
+    pathMatch: 'full'
+  },
+  {
+    path: 'intro',
+    component: BasicIntroComponent
+  },
+  {
+    path: 'callbacks',
+    component: CallbackComponent
+  },
+  {
+    path: 'promises',
+    component: PromisesComponent
+  },
+  {
+    path: 'observable',
+    component: ObservableComponent
+  },
+  {
+    path: 'create',
+    component: CreateComponent
+  },
+  {
+    path: 'pipe',
+    component: PipeComponent
+  },
+  {
+    path: 'operators',
+    component: OperatorsComponent
+  },
+  {
+    path: 'subject',
+    component: SubjectComponent
+  },
+  {
+    path: 'drag-and-drop',
+    component: DragAndDropComponent
+  },
+  {
+    path: 'autocomplete',
+    component: AutocompleteComponent
+  },
+  {
+    path: 'ngrx',
+    component: NgrxComponent
+  }
+];

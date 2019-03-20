@@ -1,16 +1,25 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Observable, fromEvent, interval, of, empty, EMPTY, range, timer, throwError } from 'rxjs';
+import {
+  Observable,
+  fromEvent,
+  interval,
+  of,
+  empty,
+  EMPTY,
+  range,
+  timer,
+  throwError
+} from 'rxjs';
 import { share } from 'rxjs/operators';
 import { ListComponent } from '../../shared/list/list.component';
 
 @Component({
   selector: 'app-create',
   template: `
-    <h1>
-      Create Observables
-    </h1>
+    <h1>Create Observables</h1>
     <p>
-    dostępne metody: Create, Defer, Empty/Never/Throw, From, Interval, Just, Range, Repeat, Start, and Timer
+      dostępne metody: Create, Defer, Empty/Never/Throw, From, Interval, Just,
+      Range, Repeat, Start, and Timer
     </p>
     <button #btn class="btn btn-primary">Button</button>
     <app-list #list></app-list>
@@ -18,7 +27,6 @@ import { ListComponent } from '../../shared/list/list.component';
   styles: []
 })
 export class CreateComponent implements OnInit {
-
   @ViewChild('btn')
   btn: ElementRef;
 
@@ -37,10 +45,9 @@ export class CreateComponent implements OnInit {
     // const stream$ = timer(2000);
     const stream$ = throwError('custom error');
 
-
     const sub = stream$.subscribe(
-      (val) => log('A', val),
-      (err) => log('error', err),
+      val => log('A', val),
+      err => log('error', err),
       () => log('complete')
     );
 
@@ -80,7 +87,6 @@ export class CreateComponent implements OnInit {
     //   }, 2000);
     // }, 7000);
 
-
     // const btn$ = Observable.create((obs) => {
 
     //   let counter = 0;
@@ -104,8 +110,6 @@ export class CreateComponent implements OnInit {
     //   (err) => log('error', err),
     //   () => log('complete')
     // );
-
-
   }
 }
 
@@ -129,7 +133,7 @@ export class CreateComponent implements OnInit {
     });
  */
 
- /**
+/**
 
     // const stream$ = interval(1000);
     // const stream$ = of(1000);

@@ -10,15 +10,12 @@ import { UserService } from '../services/user.service';
   styleUrls: ['./nodejs-nav.component.css']
 })
 export class NodejsNavComponent {
-
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
-    .pipe(
-      map(result => result.matches)
-    );
+  isHandset$: Observable<boolean> = this.breakpointObserver
+    .observe(Breakpoints.Handset)
+    .pipe(map(result => result.matches));
 
   constructor(
     private breakpointObserver: BreakpointObserver,
     public userService: UserService
-    ) {}
-
+  ) {}
 }

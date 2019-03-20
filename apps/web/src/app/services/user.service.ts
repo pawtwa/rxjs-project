@@ -7,30 +7,31 @@ import { tap, switchMap, catchError, map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class UserService {
-
   private _tokenPayload$ = new BehaviorSubject(null);
 
   get token$() {
-    return this._tokenPayload$.asObservable().pipe(map(payload => payload ? payload.token : null));
+    return this._tokenPayload$
+      .asObservable()
+      .pipe(map(payload => (payload ? payload.token : null)));
   }
 
   get user$() {
-    return this._tokenPayload$.asObservable().pipe(map(payload => payload ? payload.user : null));
+    return this._tokenPayload$
+      .asObservable()
+      .pipe(map(payload => (payload ? payload.user : null)));
   }
 
-  constructor(
-    private http: HttpClient
-  ) {
+  constructor(private http: HttpClient) {
     this.setupLocalStorage();
   }
 
   login({ email, password }) {
-    return this.http.post('/api/user/login', {
-      email,
-      password,
-    }).pipe(
-      tap(user => this._tokenPayload$.next(user))
-    );
+    return this.http
+      .post('/api/user/login', {
+        email,
+        password
+      })
+      .pipe(tap(user => this._tokenPayload$.next(user)));
   }
 
   logout() {
@@ -39,12 +40,13 @@ export class UserService {
 
   getProfile() {
     return this.user$.pipe(
-      switchMap(user => this.http.get('/api/user').pipe(catchError(err => null)))
+      switchMap(user =>
+        this.http.get('/api/user').pipe(catchError(err => null))
+      )
     );
   }
 
   setupLocalStorage() {
-
     const STORAGE_KEY = 'token-payload';
     // get user from session
     const userFromStorage = localStorage.getItem(STORAGE_KEY);

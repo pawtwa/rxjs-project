@@ -34,9 +34,6 @@ import { NgrxComponent } from './example/ngrx.component';
     SubjectComponent,
     NgrxComponent
   ],
-  imports: [
-    CommonModule,
-    RxjsRoutingModule
-  ]
+  imports: [CommonModule, RxjsRoutingModule]
 })
-export class RxjsModule { }
+export class RxjsModule {}

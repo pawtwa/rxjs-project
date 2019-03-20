@@ -13,9 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NxModule } from '@nrwl/nx';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    HomeComponent],
+  declarations: [AppComponent, HomeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -28,4 +26,4 @@ import { NxModule } from '@nrwl/nx';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

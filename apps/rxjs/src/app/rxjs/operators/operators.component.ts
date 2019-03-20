@@ -1,30 +1,50 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { Observable, fromEvent, combineLatest, BehaviorSubject, interval, of, EMPTY } from 'rxjs';
-import { startWith, map, share, switchMap, catchError, takeUntil } from 'rxjs/operators';
+import {
+  Observable,
+  fromEvent,
+  combineLatest,
+  BehaviorSubject,
+  interval,
+  of,
+  EMPTY
+} from 'rxjs';
+import {
+  startWith,
+  map,
+  share,
+  switchMap,
+  catchError,
+  takeUntil
+} from 'rxjs/operators';
 import { ajax } from 'rxjs/ajax';
 import { ListComponent } from '../../shared/list/list.component';
 
 @Component({
   selector: 'app-operators',
   template: `
-  <h1>
-  Operatory
-    </h1>
+    <h1>Operatory</h1>
     <p>
-      zaawansowane: switchMap, debounceTime throttleTime combineLatest retry merge delay bufferTime switchMap takeUntil
+      zaawansowane: switchMap, debounceTime throttleTime combineLatest retry
+      merge delay bufferTime switchMap takeUntil
     </p>
-    <input #input type="text" id="textInput" class="form-control" placeholder="Enter Query..." autocomplete="false">
-    <pre>{{text}}</pre>
+    <input
+      #input
+      type="text"
+      id="textInput"
+      class="form-control"
+      placeholder="Enter Query..."
+      autocomplete="false"
+    />
+    <pre>{{ text }}</pre>
     <button #btn class="btn btn-primary">Button</button>
 
-    <pre>{{data$ | async | json }}</pre>
+    <pre>{{ data$ | async | json }}</pre>
 
     <app-list #list></app-list>
   `,
   styles: []
 })
 export class OperatorsComponent implements OnInit {
-
   @ViewChild('input')
   input: ElementRef;
   @ViewChild('btn')
@@ -47,7 +67,7 @@ export class OperatorsComponent implements OnInit {
 
     this.data$ = ajax('/api/long').pipe(
       map(res => res.response),
-      startWith({id: 2, name: 'guest'}),
+      startWith({ id: 2, name: 'guest' }),
       takeUntil(btn$)
     );
 
@@ -65,7 +85,6 @@ export class OperatorsComponent implements OnInit {
     // setTimeout(() => {
     //   interval$.pipe(takeUntil(btn$)).subscribe(v => log('Z', v));
     // }, 5000);
-
 
     // const id$ = of(1);
 
@@ -104,10 +123,8 @@ export class OperatorsComponent implements OnInit {
     //   err => log('ERR', err)
     // );
 
-
     // const config$ = new BehaviorSubject('config');
   }
-
 }
 
 /**

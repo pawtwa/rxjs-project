@@ -1,28 +1,41 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Observable, fromEvent, interval, Subject, Subscription } from 'rxjs';
-import { map, distinctUntilChanged, debounceTime, debounce, groupBy, filter, bufferTime, buffer, retry, switchMap } from 'rxjs/operators';
+import {
+  map,
+  distinctUntilChanged,
+  debounceTime,
+  debounce,
+  groupBy,
+  filter,
+  bufferTime,
+  buffer,
+  retry,
+  switchMap
+} from 'rxjs/operators';
 import { ajax } from 'rxjs/ajax';
 import { ListComponent } from '../../shared/list/list.component';
 
 @Component({
   selector: 'app-pipe',
   template: `
-    <h1>
-      Metoda pipe() na Observable
-    </h1>
+    <h1>Metoda pipe() na Observable</h1>
     <h2>operatory</h2>
-    <p>
-      podstawowe: map, filter, reduce
-    </p>
-    <input #input type="text" id="textInput" class="form-control" placeholder="Enter Query..." autocomplete="false">
-    <pre>{{text}}</pre>
+    <p>podstawowe: map, filter, reduce</p>
+    <input
+      #input
+      type="text"
+      id="textInput"
+      class="form-control"
+      placeholder="Enter Query..."
+      autocomplete="false"
+    />
+    <pre>{{ text }}</pre>
     <button #btn class="btn btn-primary">Button</button>
     <app-list #list></app-list>
   `,
   styles: []
 })
 export class PipeComponent implements OnInit {
-
   @ViewChild('input')
   input: ElementRef;
   @ViewChild('btn')
@@ -35,7 +48,6 @@ export class PipeComponent implements OnInit {
     const log = (...args) => this.list.add(...args);
     const button = this.btn.nativeElement;
     const input = this.input.nativeElement;
-
 
     const interval$ = interval(1000);
     const btn$: Observable<MouseEvent> = fromEvent(button, 'click');
@@ -58,21 +70,18 @@ export class PipeComponent implements OnInit {
       // filter(v => v.length > 2),
       myFilter<string>(v => v.length > 2),
       // debounce(() => interval$),
-      debounceTime(250),
+      debounceTime(250)
       // bufferTime(2000)
       // buffer(interval$)
     );
 
     const s = keyboard$.subscribe(v => log('V', v));
-
   }
-
 }
 
 function myDistinctUntilChanged() {
   return function(in$): Observable<any> {
     return Observable.create(obs => {
-
       let value;
 
       const sub = in$.subscribe(v => {
@@ -90,11 +99,8 @@ function myDistinctUntilChanged() {
 }
 
 function myFilter<T>(compare) {
-
   return function(in$: Observable<T>) {
-
     return Observable.create(obs => {
-
       const sub: Subscription = in$.subscribe(
         v => {
           if (compare(v)) {

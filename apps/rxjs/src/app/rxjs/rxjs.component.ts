@@ -8,12 +8,9 @@ import { Routes } from '@angular/router';
   styleUrls: ['./rxjs.component.css']
 })
 export class RxjsComponent implements OnInit {
-
   routes: Routes = ROUTES;
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

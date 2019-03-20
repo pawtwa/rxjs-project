@@ -1,4 +1,10 @@
-import { Component, OnInit, ViewChild, ViewRef, ElementRef } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ViewRef,
+  ElementRef
+} from '@angular/core';
 import { fromEvent } from 'rxjs';
 import { ListComponent } from '../../shared/list/list.component';
 
@@ -12,17 +18,15 @@ import { ListComponent } from '../../shared/list/list.component';
   styles: []
 })
 export class BasicIntroComponent implements OnInit {
-
   @ViewChild('btn')
   btn: ElementRef;
 
   @ViewChild('list')
   list: ListComponent;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
-
     const button = this.btn.nativeElement;
 
     console.log('btn', button);
@@ -36,7 +40,5 @@ export class BasicIntroComponent implements OnInit {
     log('my value label', 'my value to log');
 
     button.addEventListener('click', log);
-
   }
-
 }

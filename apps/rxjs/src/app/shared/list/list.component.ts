@@ -6,7 +6,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list.component.css']
 })
 export class ListComponent implements OnInit {
-
   items: any[] = [];
   add: (...args: any) => void;
 
@@ -27,11 +26,7 @@ export class ListComponent implements OnInit {
       }
       this.items.unshift(item);
     };
-   }
-
-  ngOnInit() {
   }
 
-
-
+  ngOnInit() {}
 }

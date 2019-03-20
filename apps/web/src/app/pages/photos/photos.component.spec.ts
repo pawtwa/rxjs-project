@@ -6,7 +6,7 @@ import {
   MatCardModule,
   MatGridListModule,
   MatIconModule,
-  MatMenuModule,
+  MatMenuModule
 } from '@angular/material';
 
 import { PhotosComponent } from './photos.component';
@@ -25,7 +25,7 @@ describe('PhotosComponent', () => {
         MatCardModule,
         MatGridListModule,
         MatIconModule,
-        MatMenuModule,
+        MatMenuModule
       ]
     }).compileComponents();
   }));

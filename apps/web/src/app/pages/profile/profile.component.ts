@@ -14,16 +14,11 @@ export class ProfileComponent implements OnInit, OnDestroy {
 
   profile$: Observable<any>;
 
-  constructor(
-    private userService: UserService,
-    private router: Router
-  ) { }
+  constructor(private userService: UserService, private router: Router) {}
 
   ngOnInit() {
     this.profile$ = this.userService.getProfile();
-    this.userService.user$.pipe(
-      takeUntil(this.destroy$),
-    ).subscribe(user => {
+    this.userService.user$.pipe(takeUntil(this.destroy$)).subscribe(user => {
       if (!user) {
         this.router.navigateByUrl('/nodejs/login');
       }

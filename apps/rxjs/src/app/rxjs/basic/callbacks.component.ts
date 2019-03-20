@@ -1,4 +1,11 @@
-import { Component, OnInit, ViewChild, ViewRef, ElementRef, OnDestroy } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  ViewChild,
+  ViewRef,
+  ElementRef,
+  OnDestroy
+} from '@angular/core';
 import { fromEvent, Observable, Observer, Subscription } from 'rxjs';
 import { ListComponent } from '../../shared/list/list.component';
 
@@ -12,15 +19,13 @@ import { ListComponent } from '../../shared/list/list.component';
   styles: []
 })
 export class CallbackComponent implements OnInit, OnDestroy {
-
   @ViewChild('btn')
   btn: ElementRef;
 
   @ViewChild('list')
   list: ListComponent;
 
-  constructor() { }
-
+  constructor() {}
 
   ajaxDestroy: any;
 
@@ -29,7 +34,7 @@ export class CallbackComponent implements OnInit, OnDestroy {
     const button = this.btn.nativeElement;
 
     // callbacks
-    const onClick = (e) => {
+    const onClick = e => {
       this.ajaxDestroy = ajax('/api/parse', (err, data) => {
         this.ajaxDestroy = null;
         log('ajax 1', data);
@@ -44,8 +49,6 @@ export class CallbackComponent implements OnInit, OnDestroy {
       button.removeEventListener('click', onClick);
     };
     button.addEventListener('click', onClick);
-
-
   }
   ngOnDestroy(): void {
     if (this.ajaxDestroy) {
@@ -56,8 +59,8 @@ export class CallbackComponent implements OnInit, OnDestroy {
 
 function ajax(url, cb) {
   fetch(url)
-  .then(res => res.json())
-  .then( res => cb(null, res), err => cb(err));
+    .then(res => res.json())
+    .then(res => cb(null, res), err => cb(err));
 }
 
 /**
@@ -76,8 +79,7 @@ function ajax(url, cb) {
 
  */
 
-
- /**
+/**
 
     const onClick = (e) => {
       log('click');
