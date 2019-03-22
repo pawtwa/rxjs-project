@@ -14,7 +14,6 @@ import { ListComponent } from '../../shared/list/list.component';
   template: `
     <h1>Promise</h1>
     <button #btn class="btn btn-primary">Button</button>
-    <app-list #list></app-list>
   `,
   styles: []
 })
@@ -22,10 +21,7 @@ export class PromisesComponent implements OnInit {
   @ViewChild('btn')
   btn: ElementRef;
 
-  @ViewChild('list')
-  list: ListComponent;
-
-  constructor() {}
+  constructor(private list: ListComponent) {}
 
   async ngOnInit() {
     // return 'strin';

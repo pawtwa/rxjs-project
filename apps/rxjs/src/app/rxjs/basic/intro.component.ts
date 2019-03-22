@@ -3,7 +3,8 @@ import {
   OnInit,
   ViewChild,
   ViewRef,
-  ElementRef
+  ElementRef,
+  Inject
 } from '@angular/core';
 import { fromEvent } from 'rxjs';
 import { ListComponent } from '../../shared/list/list.component';
@@ -13,7 +14,6 @@ import { ListComponent } from '../../shared/list/list.component';
   template: `
     <h1>RxJS Playground</h1>
     <button #btn class="btn btn-primary">Button</button>
-    <app-list #list></app-list>
   `,
   styles: []
 })
@@ -21,10 +21,7 @@ export class BasicIntroComponent implements OnInit {
   @ViewChild('btn')
   btn: ElementRef;
 
-  @ViewChild('list')
-  list: ListComponent;
-
-  constructor() {}
+  constructor(private list: ListComponent) {}
 
   ngOnInit() {
     const button = this.btn.nativeElement;

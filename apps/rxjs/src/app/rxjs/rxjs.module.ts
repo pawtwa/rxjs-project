@@ -6,7 +6,7 @@ import { RxjsComponent } from './rxjs.component';
 import { CallbackComponent } from './basic/callbacks.component';
 import { PromisesComponent } from './basic/promises.component';
 import { BasicIntroComponent } from './basic/intro.component';
-import { OperatorsComponent } from './operators/operators.component';
+import { OperatorsComponent } from './basic/operators.component';
 import { RouteS2aPipe } from '../route-s2a.pipe';
 import { ObservableComponent } from './basic/observable.component';
 import { DragAndDropComponent } from './example/drag-and-drop.component';

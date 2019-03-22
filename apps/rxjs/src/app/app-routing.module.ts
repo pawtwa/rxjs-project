@@ -15,10 +15,6 @@ import { HomeComponent } from './home/home.component';
         {
           path: 'rxjs',
           loadChildren: './rxjs/rxjs.module#RxjsModule'
-        },
-        {
-          path: 'nodejs',
-          loadChildren: './nodejs/nodejs.module#NodejsModule'
         }
       ],
       { useHash: true }

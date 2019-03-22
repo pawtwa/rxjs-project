@@ -31,7 +31,6 @@ import { ListComponent } from '../../shared/list/list.component';
     />
     <pre>{{ text }}</pre>
     <button #btn class="btn btn-primary">Button</button>
-    <app-list #list></app-list>
   `,
   styles: []
 })
@@ -40,9 +39,8 @@ export class PipeComponent implements OnInit {
   input: ElementRef;
   @ViewChild('btn')
   btn: ElementRef;
-  @ViewChild('list')
-  list: ListComponent;
   text: string;
+  constructor(private list: ListComponent) {}
 
   ngOnInit() {
     const log = (...args) => this.list.add(...args);

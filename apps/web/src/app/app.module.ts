@@ -33,6 +33,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
 
 const routes: Routes = [
   {
@@ -82,7 +86,9 @@ const routes: Routes = [
     MatPaginatorModule,
     MatSortModule,
     MatGridListModule,
-    MatMenuModule
+    MatMenuModule,
+    StoreModule.forRoot(reducers, { metaReducers }),
+    !environment.production ? StoreDevtoolsModule.instrument() : []
   ],
   bootstrap: [AppComponent]
 })

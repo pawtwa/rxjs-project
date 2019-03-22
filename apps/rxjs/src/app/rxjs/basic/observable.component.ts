@@ -15,16 +15,13 @@ import { ListComponent } from '../../shared/list/list.component';
   template: `
     <h1>Observable</h1>
     <button #btn class="btn btn-primary">Button</button>
-    <app-list #list></app-list>
   `,
   styles: []
 })
 export class ObservableComponent implements OnInit {
   @ViewChild('btn')
   btn: ElementRef;
-
-  @ViewChild('list')
-  list: ListComponent;
+  constructor(private list: ListComponent) {}
 
   ngOnInit() {
     const log = (...args) => this.list.add(...args);

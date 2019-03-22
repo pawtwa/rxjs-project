@@ -4,7 +4,7 @@ import { PromisesComponent } from './basic/promises.component';
 import { ObservableComponent } from './basic/observable.component';
 import { CreateComponent } from './basic/create.component';
 import { PipeComponent } from './basic/pipe.component';
-import { OperatorsComponent } from './operators/operators.component';
+import { OperatorsComponent } from './basic/operators.component';
 import { SubjectComponent } from './basic/subject.component';
 import { DragAndDropComponent } from './example/drag-and-drop.component';
 import { AutocompleteComponent } from './example/autocomplete.component';
