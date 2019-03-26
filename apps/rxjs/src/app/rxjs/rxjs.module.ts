@@ -16,6 +16,7 @@ import { PipeComponent } from './basic/pipe.component';
 import { CreateComponent } from './basic/create.component';
 import { SubjectComponent } from './basic/subject.component';
 import { NgrxComponent } from './example/ngrx.component';
+import { GesturesComponent } from './example/gestures.component';
 
 @NgModule({
   declarations: [
@@ -32,8 +33,8 @@ import { NgrxComponent } from './example/ngrx.component';
     PipeComponent,
     CreateComponent,
     SubjectComponent,
-    NgrxComponent
+    GesturesComponent
   ],
   imports: [CommonModule, RxjsRoutingModule]
 })
-export class RxjsModule {}
+export class RxjsModule { }

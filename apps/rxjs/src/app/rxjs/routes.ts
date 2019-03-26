@@ -10,6 +10,7 @@ import { DragAndDropComponent } from './example/drag-and-drop.component';
 import { AutocompleteComponent } from './example/autocomplete.component';
 import { NgrxComponent } from './example/ngrx.component';
 import { BasicIntroComponent } from './basic/intro.component';
+import { GesturesComponent } from './example/gestures.component';
 
 export const ROUTES: Routes = [
   {
@@ -58,7 +59,7 @@ export const ROUTES: Routes = [
     component: AutocompleteComponent
   },
   {
-    path: 'ngrx',
-    component: NgrxComponent
+    path: 'gestures',
+    component: GesturesComponent
   }
 ];
