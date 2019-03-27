@@ -53,9 +53,22 @@ export class GesturesComponent implements OnInit {
   gesture: any;
 
   ngOnInit() {
-    const down$ = fromEvent<MouseEvent>(document, 'mousedown');
-    const move$ = fromEvent<MouseEvent>(document, 'mousemove');
-    const up$ = fromEvent<MouseEvent>(document, 'mouseup');
+    const down$ = merge(
+      fromEvent<MouseEvent>(document, 'mousedown'),
+      fromEvent<MouseEvent>(document, 'touchstart')
+    );
+    const move$ = merge(
+      fromEvent<MouseEvent>(document, 'mousemove').pipe(
+        map<any, Pos>((e) => ({ x: e.pageX, y: e.pageY })),
+      ),
+      fromEvent<MouseEvent>(document, 'touchmove').pipe(
+        map<any, Pos>((e) => ({ x: e.touches[0].pageX, y: e.touches[0].pageY }))
+      )
+    );
+    const up$ = merge(
+      fromEvent<MouseEvent>(document, 'mouseup'),
+      fromEvent<MouseEvent>(document, 'touchend')
+    );
 
     const gestures = {
       'D': 'Down',
@@ -67,12 +80,12 @@ export class GesturesComponent implements OnInit {
       'DRU': 'U shape',
       'DRD': 'Waterfall',
       'RDLU': 'Circle',
+      'RDLUR': 'Circle Full',
     };
 
     const drag$ = down$.pipe(
       tap(() => this.clear()),
-      mergeMap(downEvent => move$.pipe(
-        map<any, Pos>((e) => ({ x: e.pageX, y: e.pageY })),
+      mergeMap(() => move$.pipe(
         tap(pos => this.draw(pos)),
         toGesture(this.threshold),
         distinctUntilChanged(),
@@ -125,12 +138,6 @@ export class GesturesComponent implements OnInit {
         return out$;
       };
     }
-  }
-
-  filterByThreshold(prev: Pos, next: Pos) {
-    console.log('F', prev.x, next.x, Math.abs(prev.x - next.x), Math.abs(prev.x - next.x) >= this.threshold);
-
-    return Math.abs(prev.x - next.x) >= this.threshold;
   }
   clear() {
     this.host.nativeElement.innerHTML = '';
