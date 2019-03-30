@@ -21,42 +21,42 @@ export class PromisesComponent implements OnInit {
   @ViewChild('btn')
   btn: ElementRef;
 
-  constructor(private list: ListComponent) {}
+  constructor(private list: ListComponent) { }
 
   async ngOnInit() {
-    // return 'strin';
-
     const log = (...args) => this.list.add(...args);
     const button = this.btn.nativeElement;
 
-    // const myTask = new Promise((resolve, reject) => {
+    // tworzenie promisa
+    const myTask = new Promise((resolve, reject) => {
+      setTimeout(() => {
+        resolve({ title: 'my data after: 2s' });
+      }, 2000);
 
-    //   setTimeout(() => {
-    //     resolve({title: 'my data'});
-    //   }, 2000);
+    });
 
-    // });
+    myTask.then(data => log(data));
 
-    // myTask.then(data => log(data));
-
+    // cache
     // setTimeout(() => {
     //   myTask.then(data => log(data));
     // }, 3000);
 
-    // try {
-    //   // ajax + cache
-    //   const data = await fetch('/api/parse')
-    //      .catch(err => Promise.resolve({title: 'my data from cache'}));
+    // async await
+    try {
+      // ajax + cache
+      const data = await fetch('/api/parse')
+        .catch(err => Promise.resolve({ title: 'my data from cache' }));
 
-    //   // get user
-    //   const data2 = await fetch('/api/parse');
+      // get user
+      const data2 = await fetch('/api/parse');
 
-    // } catch (error) {
-    //   console.log('error', error);
-    // }
+    } catch (error) {
+      console.log('error', error);
+    }
 
+    // chaining
     let running = false;
-    // callbacks
     const onClick = e => {
       log(e);
       if (running) {
@@ -88,57 +88,3 @@ export class PromisesComponent implements OnInit {
     button.addEventListener('click', onClick);
   }
 }
-
-/**
-
-    const myTask = new Promise((resolve, reject) => {
-
-      setTimeout(() => {
-        resolve({title: 'my data'});
-      }, 2000);
-
-    });
-
-    myTask.then(data => log(data));
-
-    try {
-      // ajax + cache
-      const data = await fetch('/api/parse')
-        .then()
-        .catch(err => Promise.resolve({title: 'my data from cache'}));
-
-      // get user
-      const data2 = await fetch('/api/parse');
-
-    } catch (error) {
-      console.log('error', error);
-    }
-
-    // callbacks
-    const onClick = (e) => {
-      log(e);
-
-      fetch('/api/parse')
-      .then(res => res.json())
-      .then(data => {
-        if (!data) {
-          return Promise.reject('no data  from server');
-        }
-        return fetch('/api/create', {method: 'GET'}).then(res => res.json());
-      })
-      .catch(err => {
-          return Promise.resolve({title: 'my data from cache'});
-      })
-      .then(data => {
-        return fetch('/api/parse');
-      })
-      .catch(
-        err => log('err', err)
-      );
-
-
-      // button.removeEventListener('click', onClick);
-    };
-    button.addEventListener('click', onClick);
-
- */

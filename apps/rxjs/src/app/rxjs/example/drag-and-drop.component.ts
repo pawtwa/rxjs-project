@@ -50,159 +50,96 @@ export class DragAndDropComponent implements OnInit {
     const box = this.box.nativeElement;
     const host = this.host.nativeElement;
 
-    const explode$ = new Subject();
-
     const down$ = fromEvent<MouseEvent>(box, 'mousedown');
     const move$ = fromEvent<MouseEvent>(document, 'mousemove');
     const up$ = fromEvent<MouseEvent>(document, 'mouseup');
 
-    const drag$ = down$.pipe(
-      mergeMap(downEvent => {
-        // miejsce kliknięcia na stronie
-        const startX = downEvent.pageX;
-        const startY = downEvent.pageY;
 
-        // obecna pozycja boxa
-        const boxX = parseInt(box.style.left, 10) || 0;
-        const boxY = parseInt(box.style.top, 10) || 0;
-
-        // host
-        const hostX = parseInt(host.style.width, 10) || 0;
-        const hostY = parseInt(host.style.height, 10) || 0;
-
-        return move$.pipe(
-          map(function(moveEvent) {
-            const pos = {
-              x: boxX + moveEvent.pageX - startX,
-              y: boxY + moveEvent.pageY - startY
-            };
-            if (pos.x < hostX) {
-              explode$.next(pos);
-              pos.x = hostX;
-            }
-            if (pos.y < hostY) {
-              explode$.next(pos);
-              pos.y = hostY;
-            }
-            return pos;
-          }),
-          takeUntil(merge(up$, explode$))
-        );
-      })
-    );
-
-    drag$.subscribe(pos => {
-      box.style.top = pos.y + 'px';
-      box.style.left = pos.x + 'px';
-    });
-  }
-}
-/**
-
-    const box = this.box.nativeElement;
-
-    const move$ = fromEvent(document, 'mousemove');
-    const down$ = fromEvent(document, 'mousedown');
-    const up$ = fromEvent(document, 'mouseup');
-
+    /**
+     * PODSTAWA
+     */
     const drag$ = down$.pipe(
       mergeMap((downEvent) => {
         return move$.pipe(takeUntil(up$));
       })
     );
-
-    drag$.subscribe((pos) => console.log(pos)));
-
- */
-/**
-
-    const box = this.box.nativeElement;
-
-    const down$ = fromEvent<MouseEvent>(box, 'mousedown');
-    const move$ = fromEvent<MouseEvent>(document, 'mousemove');
-    const up$ = fromEvent<MouseEvent>(document, 'mouseup');
-
-    const drag$ = down$.pipe(
-      mergeMap((downEvent) => {
-
-        // miejsce kliknięcia na stronie
-        const startX = downEvent.pageX;
-        const startY = downEvent.pageY;
-
-        // obecna pozycja boxa
-        const boxX = parseInt(box.style.left, 10) || 0;
-        const boxY = parseInt(box.style.top, 10) || 0;
-
-        return move$.pipe(
-          map( function( moveEvent ) {
-            return {
-              x: boxX + moveEvent.pageX - startX,
-              y: boxY + moveEvent.pageY - startY
-            };
-          }),
-          takeUntil(up$)
-        );
-      })
-    );
-
-    drag$.subscribe((pos) => {
+    drag$.subscribe(pos => {
       box.style.top = pos.y + 'px';
       box.style.left = pos.x + 'px';
     });
 
- */
+    /**
+     * PRZYKŁAD
+     */
+    // const drag$ = down$.pipe(
+    //   mergeMap((downEvent) => {
 
-/**
+    //     // miejsce kliknięcia na stronie
+    //     const startX = downEvent.pageX;
+    //     const startY = downEvent.pageY;
 
-    const box = this.box.nativeElement;
-    const host = this.host.nativeElement;
+    //     // obecna pozycja boxa
+    //     const boxX = parseInt(box.style.left, 10) || 0;
+    //     const boxY = parseInt(box.style.top, 10) || 0;
 
-    const explode$ = new Subject();
+    //     return move$.pipe(
+    //       map(function (moveEvent) {
+    //         return {
+    //           x: boxX + moveEvent.pageX - startX,
+    //           y: boxY + moveEvent.pageY - startY
+    //         };
+    //       }),
+    //       takeUntil(up$)
+    //     );
+    //   })
+    // );
+    // drag$.subscribe((pos) => {
+    //   box.style.top = pos.y + 'px';
+    //   box.style.left = pos.x + 'px';
+    // });
 
-    const down$ = fromEvent<MouseEvent>(box, 'mousedown');
-    const move$ = fromEvent<MouseEvent>(document, 'mousemove');
-    const up$ = fromEvent<MouseEvent>(document, 'mouseup');
+    /**
+     * KOLIZJE
+     */
+    // const explode$ = new Subject();
 
-    const drag$ = down$.pipe(
-      mergeMap((downEvent) => {
+    // const drag$ = down$.pipe(
+    //   mergeMap(downEvent => {
+    //     // miejsce kliknięcia na stronie
+    //     const startX = downEvent.pageX;
+    //     const startY = downEvent.pageY;
 
-        // miejsce kliknięcia na stronie
-        const startX = downEvent.pageX;
-        const startY = downEvent.pageY;
+    //     // obecna pozycja boxa
+    //     const boxX = parseInt(box.style.left, 10) || 0;
+    //     const boxY = parseInt(box.style.top, 10) || 0;
 
-        // obecna pozycja boxa
-        const boxX = parseInt(box.style.left, 10) || 0;
-        const boxY = parseInt(box.style.top, 10) || 0;
+    //     // host
+    //     const hostX = parseInt(host.style.width, 10) || 0;
+    //     const hostY = parseInt(host.style.height, 10) || 0;
 
-        // host
-        const hostX = parseInt(host.style.width, 10) || 0;
-        const hostY = parseInt(host.style.height, 10) || 0;
-
-        return move$.pipe(
-          map( function( moveEvent ) {
-            const pos = {
-              x: boxX + moveEvent.pageX - startX,
-              y: boxY + moveEvent.pageY - startY
-            };
-            if (pos.x < hostX) {
-              explode$.next(pos);
-              pos.x = hostX;
-            }
-            if (pos.y < hostY) {
-              explode$.next(pos);
-              pos.y = hostY;
-            }
-            return pos;
-          }),
-          takeUntil(up$),
-          takeUntil(explode$)
-        );
-      })
-    );
-
-    drag$.subscribe((pos) => {
-      box.style.top = pos.y + 'px';
-      box.style.left = pos.x + 'px';
-    });
-
-  */
+    //     return move$.pipe(
+    //       map(function (moveEvent) {
+    //         const pos = {
+    //           x: boxX + moveEvent.pageX - startX,
+    //           y: boxY + moveEvent.pageY - startY
+    //         };
+    //         if (pos.x < hostX) {
+    //           explode$.next(pos);
+    //           pos.x = hostX;
+    //         }
+    //         if (pos.y < hostY) {
+    //           explode$.next(pos);
+    //           pos.y = hostY;
+    //         }
+    //         return pos;
+    //       }),
+    //       takeUntil(merge(up$, explode$))
+    //     );
+    //   })
+    // );
+    // drag$.subscribe(pos => {
+    //   box.style.top = pos.y + 'px';
+    //   box.style.left = pos.x + 'px';
+    // });
+  }
+}

@@ -21,7 +21,7 @@ export class CallbackComponent implements OnInit, OnDestroy {
   @ViewChild('btn')
   btn: ElementRef;
 
-  constructor(private list: ListComponent) {}
+  constructor(private list: ListComponent) { }
 
   ajaxDestroy: any;
 
@@ -42,9 +42,13 @@ export class CallbackComponent implements OnInit, OnDestroy {
         });
       });
 
-      button.removeEventListener('click', onClick);
+      // button.removeEventListener('click', onClick);
     };
     button.addEventListener('click', onClick);
+
+    setTimeout(() => {
+      button.removeEventListener('click', onClick);
+    }, 5000);
   }
   ngOnDestroy(): void {
     if (this.ajaxDestroy) {
@@ -59,38 +63,4 @@ function ajax(url, cb) {
     .then(res => cb(null, res), err => cb(err));
 }
 
-/**
 
-    // callbacks
-    const onClick = (e) => {
-      ajax('/api/parse', (err, data) => {
-        ajax('/api/create', (error, record) => {
-          log('record', record);
-        });
-      });
-
-      // button.removeEventListener('click', onClick);
-    };
-    button.addEventListener('click', onClick);
-
- */
-
-/**
-
-    const onClick = (e) => {
-      log('click');
-      ajax('/api/parse', (err, data) => {
-        log(err, data);
-        ajax('/api/create', (error, record) => {
-          log('record', record);
-        });
-      });
-
-    };
-    button.addEventListener('click', onClick);
-
-    setTimeout(() => {
-      button.removeEventListener('click', onClick);
-    }, 2000);
-
-  */

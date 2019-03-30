@@ -40,7 +40,7 @@ export class PipeComponent implements OnInit {
   @ViewChild('btn')
   btn: ElementRef;
   text: string;
-  constructor(private list: ListComponent) {}
+  constructor(private list: ListComponent) { }
 
   ngOnInit() {
     const log = (...args) => this.list.add(...args);
@@ -64,9 +64,9 @@ export class PipeComponent implements OnInit {
     const keyboard$ = input$.pipe(
       map<any, string>(e => e.target.value),
       // distinctUntilChanged(),
-      myDistinctUntilChanged(),
+      // myDistinctUntilChanged(),
       // filter(v => v.length > 2),
-      myFilter<string>(v => v.length > 2),
+      // myFilter<string>(v => v.length > 2),
       // debounce(() => interval$),
       debounceTime(250)
       // bufferTime(2000)
@@ -77,76 +77,3 @@ export class PipeComponent implements OnInit {
   }
 }
 
-function myDistinctUntilChanged() {
-  return function(in$): Observable<any> {
-    return Observable.create(obs => {
-      let value;
-
-      const sub = in$.subscribe(v => {
-        if (value !== v) {
-          obs.next(v);
-        }
-        value = v;
-      });
-
-      return () => {
-        sub.unsubscribe();
-      };
-    });
-  };
-}
-
-function myFilter<T>(compare) {
-  return function(in$: Observable<T>) {
-    return Observable.create(obs => {
-      const sub: Subscription = in$.subscribe(
-        v => {
-          if (compare(v)) {
-            obs.next(v);
-          }
-        },
-        err => obs.error(err),
-        () => obs.complete()
-      );
-
-      return () => {
-        sub.unsubscribe();
-      };
-    });
-  };
-}
-
-/**
-
-    const btn$: Observable<MouseEvent> = fromEvent(button, 'click');
-    const input$ = fromEvent<any>(input, 'keyup'); // TODO e.target.value
-
-    const interval$ = interval(1000);
-
-    function myOperator(in$) {
-      // return in$.pipe(
-
-      // );
-      const subj$ = new Subject();
-
-      in$.subscribe(v => {
-        subj$.next(v + 1);
-      });
-
-      return subj$.asObservable();
-    }
-
-    const keyboard$ = input$.pipe(
-      map(e => e.target.value),
-      distinctUntilChanged(),
-      // filter(v => v.length > 2),
-      // debounce(() => interval$),
-      // debounceTime(250),
-      // bufferTime(2000)
-      myOperator,
-      buffer(interval$)
-    );
-
-    keyboard$.subscribe(v => log('V', v));
-
- */
