@@ -39,8 +39,6 @@ import { ListComponent } from '../../shared/list/list.component';
     <button #btn class="btn btn-primary">Button</button>
 
     <pre>{{ data$ | async | json }}</pre>
-
-    <app-list #list></app-list>
   `,
   styles: []
 })
@@ -49,12 +47,10 @@ export class OperatorsComponent implements OnInit {
   input: ElementRef;
   @ViewChild('btn')
   btn: ElementRef;
-  @ViewChild('list')
-  list: ListComponent;
   text: string;
 
   data$: Observable<any>;
-
+  constructor(private list: ListComponent) { }
   ngOnInit() {
     const log = (...args) => this.list.add(...args);
     const button = this.btn.nativeElement;
@@ -65,11 +61,11 @@ export class OperatorsComponent implements OnInit {
 
     const interval$ = interval(1000);
 
-    this.data$ = ajax('/api/long').pipe(
-      map(res => res.response),
-      startWith({ id: 2, name: 'guest' }),
-      takeUntil(btn$)
-    );
+    // this.data$ = ajax('/api/long').pipe(
+    //   map(res => res.response),
+    //   startWith({ id: 2, name: 'guest' }),
+    //   takeUntil(btn$)
+    // );
 
     // const sharedInterval$ = interval$.pipe(
     //   takeUntil(btn$),
