@@ -28,7 +28,7 @@ import { ListComponent } from '../../shared/list/list.component';
 export class CreateComponent implements OnInit {
   @ViewChild('btn')
   btn: ElementRef;
-  constructor(private list: ListComponent) { }
+  constructor(private list: ListComponent) {}
 
   ngOnInit() {
     const log = (...args) => this.list.add(...args);

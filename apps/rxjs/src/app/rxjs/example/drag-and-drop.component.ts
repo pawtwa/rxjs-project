@@ -54,12 +54,11 @@ export class DragAndDropComponent implements OnInit {
     const move$ = fromEvent<MouseEvent>(document, 'mousemove');
     const up$ = fromEvent<MouseEvent>(document, 'mouseup');
 
-
     /**
      * PODSTAWA
      */
     const drag$ = down$.pipe(
-      mergeMap((downEvent) => {
+      mergeMap(downEvent => {
         return move$.pipe(takeUntil(up$));
       })
     );

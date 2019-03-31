@@ -21,7 +21,7 @@ export class PromisesComponent implements OnInit {
   @ViewChild('btn')
   btn: ElementRef;
 
-  constructor(private list: ListComponent) { }
+  constructor(private list: ListComponent) {}
 
   async ngOnInit() {
     const log = (...args) => this.list.add(...args);
@@ -32,7 +32,6 @@ export class PromisesComponent implements OnInit {
       setTimeout(() => {
         resolve({ title: 'my data after: 2s' });
       }, 2000);
-
     });
 
     myTask.then(data => log(data));
@@ -45,12 +44,12 @@ export class PromisesComponent implements OnInit {
     // async await
     try {
       // ajax + cache
-      const data = await fetch('/api/parse')
-        .catch(err => Promise.resolve({ title: 'my data from cache' }));
+      const data = await fetch('/api/parse').catch(err =>
+        Promise.resolve({ title: 'my data from cache' })
+      );
 
       // get user
       const data2 = await fetch('/api/parse');
-
     } catch (error) {
       console.log('error', error);
     }

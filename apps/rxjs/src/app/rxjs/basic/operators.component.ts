@@ -50,7 +50,7 @@ export class OperatorsComponent implements OnInit {
   text: string;
 
   data$: Observable<any>;
-  constructor(private list: ListComponent) { }
+  constructor(private list: ListComponent) {}
   ngOnInit() {
     const log = (...args) => this.list.add(...args);
     const button = this.btn.nativeElement;

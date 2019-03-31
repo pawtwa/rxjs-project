@@ -47,14 +47,15 @@ export class AutocompleteComponent implements OnInit {
   input: ElementRef;
 
   items = [];
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     const input = this.input.nativeElement;
 
-    const keyup$ = fromEvent(input, 'keyup').pipe(
+    const keyup$ = fromEvent(input, 'keyup')
+      .pipe
       // ???
-    );
+      ();
 
     keyup$.subscribe((data: any) => {
       console.log('data', data);

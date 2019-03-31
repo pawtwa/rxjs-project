@@ -40,7 +40,7 @@ export class PipeComponent implements OnInit {
   @ViewChild('btn')
   btn: ElementRef;
   text: string;
-  constructor(private list: ListComponent) { }
+  constructor(private list: ListComponent) {}
 
   ngOnInit() {
     const log = (...args) => this.list.add(...args);
@@ -76,4 +76,3 @@ export class PipeComponent implements OnInit {
     const s = keyboard$.subscribe(v => log('V', v));
   }
 }
-

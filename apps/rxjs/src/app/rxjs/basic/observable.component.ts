@@ -21,7 +21,7 @@ import { ListComponent } from '../../shared/list/list.component';
 export class ObservableComponent implements OnInit {
   @ViewChild('btn')
   btn: ElementRef;
-  constructor(private list: ListComponent) { }
+  constructor(private list: ListComponent) {}
 
   ngOnInit() {
     const log = (...args) => this.list.add(...args);
@@ -49,8 +49,6 @@ export class ObservableComponent implements OnInit {
     //   };
     // });
 
-
-
     /**
      * CONSUMER
      */
@@ -75,7 +73,6 @@ export class ObservableComponent implements OnInit {
     // );
   }
 }
-
 
 function ajax(url, success, error) {
   const controller = new AbortController();

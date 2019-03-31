@@ -14,7 +14,14 @@ import {
   Subject,
   merge
 } from 'rxjs';
-import { mergeMap, takeUntil, map, tap, distinctUntilChanged, scan } from 'rxjs/operators';
+import {
+  mergeMap,
+  takeUntil,
+  map,
+  tap,
+  distinctUntilChanged,
+  scan
+} from 'rxjs/operators';
 
 export interface Pos {
   x: number;
@@ -25,7 +32,7 @@ export interface Pos {
   selector: 'app-drag-and-drop',
   template: `
     <h1>Mouse Gestures</h1>
-    <h2>Gesture: {{(gesture | json) || 'draw gesture on canvas'}}</h2>
+    <h2>Gesture: {{ (gesture | json) || 'draw gesture on canvas' }}</h2>
     <div #host class="host"></div>
   `,
   encapsulation: ViewEncapsulation.None,
@@ -59,10 +66,10 @@ export class GesturesComponent implements OnInit {
     );
     const move$ = merge(
       fromEvent<MouseEvent>(document, 'mousemove').pipe(
-        map<any, Pos>((e) => ({ x: e.pageX, y: e.pageY })),
+        map<any, Pos>(e => ({ x: e.pageX, y: e.pageY }))
       ),
       fromEvent<MouseEvent>(document, 'touchmove').pipe(
-        map<any, Pos>((e) => ({ x: e.touches[0].pageX, y: e.touches[0].pageY }))
+        map<any, Pos>(e => ({ x: e.touches[0].pageX, y: e.touches[0].pageY }))
       )
     );
     const up$ = merge(
@@ -71,31 +78,33 @@ export class GesturesComponent implements OnInit {
     );
 
     const gestures = {
-      'D': 'Down',
-      'U': 'Up',
-      'L': 'Left',
-      'R': 'Right',
-      'DL': 'Down and Left',
-      'DR': 'Down adn Right',
-      'DRU': 'U shape',
-      'DRD': 'Waterfall',
-      'RDLU': 'Circle',
-      'RDLUR': 'Circle Full',
+      D: 'Down',
+      U: 'Up',
+      L: 'Left',
+      R: 'Right',
+      DL: 'Down and Left',
+      DR: 'Down adn Right',
+      DRU: 'U shape',
+      DRD: 'Waterfall',
+      RDLU: 'Circle',
+      RDLUR: 'Circle Full'
     };
 
     const drag$ = down$.pipe(
       tap(() => this.clear()),
-      mergeMap(() => move$.pipe(
-        tap(pos => this.draw(pos)),
-        toGesture(this.threshold),
-        distinctUntilChanged(),
-        scan((acc, val) => {
-          acc.push(val);
-          return acc;
-        }, []),
-        map(g => gestures[g.join('')] || 'Un known gesture'),
-        takeUntil(up$)
-      ))
+      mergeMap(() =>
+        move$.pipe(
+          tap(pos => this.draw(pos)),
+          toGesture(this.threshold),
+          distinctUntilChanged(),
+          scan((acc, val) => {
+            acc.push(val);
+            return acc;
+          }, []),
+          map(g => gestures[g.join('')] || 'Un known gesture'),
+          takeUntil(up$)
+        )
+      )
     );
 
     drag$.subscribe(gesture => {
@@ -104,7 +113,7 @@ export class GesturesComponent implements OnInit {
 
     function toGesture(t) {
       let prev;
-      return (in$) => {
+      return in$ => {
         const out$ = new Observable(obs => {
           const sub = in$.subscribe(
             (next: Pos) => {
@@ -127,7 +136,6 @@ export class GesturesComponent implements OnInit {
                 }
                 prev = next;
               }
-
             },
             err => obs.error(err),
             () => obs.complete()
@@ -149,7 +157,6 @@ export class GesturesComponent implements OnInit {
     this.host.nativeElement.appendChild(dot);
   }
 }
-
 
 /**
  * bufferCount + scan

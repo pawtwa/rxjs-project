@@ -10,7 +10,11 @@ import { CounterComponent } from './components/counter/counter.component';
 
 @NgModule({
   declarations: [AppComponent, CounterComponent],
-  imports: [BrowserModule, StoreModule.forRoot(reducers, { metaReducers }), !environment.production ? StoreDevtoolsModule.instrument() : []],
+  imports: [
+    BrowserModule,
+    StoreModule.forRoot(reducers, { metaReducers }),
+    !environment.production ? StoreDevtoolsModule.instrument() : []
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

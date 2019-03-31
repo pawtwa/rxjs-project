@@ -1,14 +1,16 @@
 import { Action } from '@ngrx/store';
 
 export enum CounterActionTypes {
-  LoadCounters = '[Counter] Load Counters',
-  
-  
+  Up = '[Counter] Up',
+  Down = '[Counter] Down'
 }
 
-export class LoadCounters implements Action {
-  readonly type = CounterActionTypes.LoadCounters;
+export class UpCounters implements Action {
+  readonly type = CounterActionTypes.Up;
 }
 
+export class DownCounters implements Action {
+  readonly type = CounterActionTypes.Up;
+}
 
-export type CounterActions = LoadCounters;
+export type CounterActions = UpCounters | DownCounters;

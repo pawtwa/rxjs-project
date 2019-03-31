@@ -21,7 +21,7 @@ export class CallbackComponent implements OnInit, OnDestroy {
   @ViewChild('btn')
   btn: ElementRef;
 
-  constructor(private list: ListComponent) { }
+  constructor(private list: ListComponent) {}
 
   ajaxDestroy: any;
 
@@ -62,5 +62,3 @@ function ajax(url, cb) {
     .then(res => res.json())
     .then(res => cb(null, res), err => cb(err));
 }
-
-

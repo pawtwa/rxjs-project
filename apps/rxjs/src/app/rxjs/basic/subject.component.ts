@@ -44,10 +44,9 @@ export class SubjectComponent implements OnInit, OnDestroy {
   @ViewChild('btn')
   btn: ElementRef;
 
-
   list$: Observable<any>;
   list: any;
-  constructor(private listComp: ListComponent) { }
+  constructor(private listComp: ListComponent) {}
   ngOnInit() {
     const log = (...args) => this.listComp.add(...args);
     const button = this.btn.nativeElement;
@@ -77,7 +76,6 @@ export class SubjectComponent implements OnInit, OnDestroy {
 
     // this.list$.subscribe(val => this.list = val);
   }
-
 
   ngOnDestroy(): void {
     // TAK

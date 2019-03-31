@@ -37,4 +37,4 @@ import { GesturesComponent } from './example/gestures.component';
   ],
   imports: [CommonModule, RxjsRoutingModule]
 })
-export class RxjsModule { }
+export class RxjsModule {}
