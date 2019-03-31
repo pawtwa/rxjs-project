@@ -44,3 +44,8 @@ export function reducer(state = initialState, action: CounterActions): State {
       return state;
   }
 }
+
+// SELEKTORY
+export const selectAmount = (state: State) => state.amount;
+export const selectStep = (state: State) => state.step;
+export const selectSaving = (state: State) => state.saving;

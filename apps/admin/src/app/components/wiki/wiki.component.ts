@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { State } from '../../reducers';
+import { State, selectWikiQuery, selectWikiResults, selectWikiLoading } from '../../reducers';
 import { Observable } from 'rxjs';
 import { WikiResult } from '../../reducers/wiki.reducer';
 import { QueryWikis } from '../../actions/wiki.actions';
@@ -12,9 +12,9 @@ import { QueryWikis } from '../../actions/wiki.actions';
 })
 export class WikiComponent implements OnInit {
 
-  public query$: Observable<string> = this.store.select('wiki', 'query');
-  public results$: Observable<WikiResult[]> = this.store.select('wiki', 'results');
-  public loading$: Observable<WikiResult[]> = this.store.select('wiki', 'loading');
+  public query$: Observable<string> = this.store.select(selectWikiQuery);
+  public results$: Observable<WikiResult[]> = this.store.select(selectWikiResults);
+  public loading$: Observable<boolean> = this.store.select(selectWikiLoading);
 
   constructor(private store: Store<State>) { }
 

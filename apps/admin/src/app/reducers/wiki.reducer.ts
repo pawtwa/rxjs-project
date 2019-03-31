@@ -43,3 +43,8 @@ export function reducer(state = initialState, action: WikiActions): State {
       return state;
   }
 }
+
+// SELEKTORY
+export const selectQuery = (state: State) => state.query;
+export const selectResults = (state: State) => state.results;
+export const selectLoading = (state: State) => state.loading;
