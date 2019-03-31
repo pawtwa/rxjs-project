@@ -10,15 +10,17 @@ import { environment } from '../environments/environment';
 import { CounterComponent } from './components/counter/counter.component';
 import { EffectsModule } from '@ngrx/effects';
 import { CounterEffects } from './effects/counter.effects';
+import { WikiComponent } from './components/wiki/wiki.component';
+import { WikiEffects } from './effects/wiki.effects';
 
 @NgModule({
-  declarations: [AppComponent, CounterComponent],
+  declarations: [AppComponent, CounterComponent, WikiComponent],
   imports: [
     HttpClientModule,
     BrowserModule,
     StoreModule.forRoot(reducers, { metaReducers }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-    EffectsModule.forRoot([CounterEffects])
+    EffectsModule.forRoot([CounterEffects, WikiEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]

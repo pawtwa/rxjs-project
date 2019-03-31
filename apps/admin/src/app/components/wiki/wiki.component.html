@@ -1,0 +1,6 @@
+<input type="text" (input)="onChangeQuery($event)" />
+<hr />
+<p *ngIf="loading$ | async">loading ...</p>
+<ul *ngIf="(results$ | async).length">
+  <li *ngFor="let result of (results$ | async)">{{ result.title }}</li>
+</ul>
