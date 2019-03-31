@@ -15,17 +15,19 @@
       "tags": []
     },
     "web": {
-      "tags": [
-        "ui"
-      ]
+      "tags": ["ui"]
     },
     "web-e2e": {
       "tags": []
     },
     "api": {
-      "tags": [
-        "api"
-      ]
+      "tags": ["api"]
+    },
+    "admin": {
+      "tags": ["ui"]
+    },
+    "admin-e2e": {
+      "tags": []
     }
   }
 }
