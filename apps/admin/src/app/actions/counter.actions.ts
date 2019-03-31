@@ -10,7 +10,7 @@ export class UpCounters implements Action {
 }
 
 export class DownCounters implements Action {
-  readonly type = CounterActionTypes.Up;
+  readonly type = CounterActionTypes.Down;
 }
 
 export type CounterActions = UpCounters | DownCounters;

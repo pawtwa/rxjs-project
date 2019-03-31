@@ -1,1 +1,5 @@
-<p>counter works!</p>
+<div>
+    <button (click)="onDownClick($event)">Down</button>
+    {{ amount$ | async }}
+    <button (click)="onUpClick($event)">Up</button>
+</div>
