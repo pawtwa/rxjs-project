@@ -1,4 +1,6 @@
 <div>
+    Step: <input type="number" (change)="onChangeStep($event)" [value]="step$ | async" />
+    <hr />
     <button (click)="onDownClick($event)">Down</button>
     {{ amount$ | async }}
     <button (click)="onUpClick($event)">Up</button>
