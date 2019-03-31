@@ -4,11 +4,13 @@ import { CounterActionTypes, CounterActions } from '../actions/counter.actions';
 export interface State {
   amount: number;
   step: number;
+  saving: boolean;
 }
 
 export const initialState: State = {
   amount: 0,
-  step: 1
+  step: 1,
+  saving: false
 };
 
 export function reducer(state = initialState, action: CounterActions): State {
@@ -27,6 +29,16 @@ export function reducer(state = initialState, action: CounterActions): State {
       return {
         ...state,
         step: action.payload.step
+      };
+    case CounterActionTypes.StepSaving:
+      return {
+        ...state,
+        saving: true
+      };
+    case CounterActionTypes.StepSaved:
+      return {
+        ...state,
+        saving: false
       };
     default:
       return state;

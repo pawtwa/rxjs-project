@@ -12,8 +12,8 @@ import { UpCounters, DownCounters, StepCounters } from '../../actions/counter.ac
 export class CounterComponent implements OnInit, OnChanges {
 
   public amount$: Observable<number> = this.store.select('counter', 'amount');
-
   public step$: Observable<number> = this.store.select('counter', 'step');
+  public saving$: Observable<boolean> = this.store.select('counter', 'saving');
 
   constructor(private store: Store<State>) { }
 
